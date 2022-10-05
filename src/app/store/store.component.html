@@ -1,0 +1,67 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">Menu</mat-icon>
+        <mat-icon *ngIf="sidenav.opened">Close</mat-icon>
+    </button>
+    <span></span>
+    AngularStore
+    <span></span>
+    <cart-summary></cart-summary>
+</mat-toolbar>
+<mat-sidenav-container [hasBackdrop]="false">
+    <mat-sidenav mode="over" #sidenav="matSidenav" class="mat-elevation-z8">
+        <button mat-button class="menu-button" [class.mat-accent]="selectedCategory == undefined"
+            (click)="changeCategory()">
+            Home
+        </button>
+        <button mat-button class="menu-button" *ngFor="let cat of categories"
+            [class.mat-accent]="cat.name == selectedCategory" (click)="changeCategory(cat.name)">
+            {{cat.name}}
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-button class="menu-button" routerLink="/admin">
+            Admin
+        </button>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="container-fluid">
+            <div class="row text-white">
+                <div class="col p-2">
+                    <div *ngFor="let product of products" class="card m-1 p-1 bg-secondary">
+                        <h4 class="mb-0">
+                            {{product.name}}
+                            <span class="badge rounded-pill bg-primary" style="float:right">
+                                {{product.price | currency:"USD":"symbol":"2.2-2"}}
+                            </span>
+                        </h4>
+                        <h6 class="mb-0">
+                            <small>ID: {{product.productId}}</small>
+                            {{product.category?.name}} | {{product.supplier?.name}}
+                        </h6>
+                        <div class="card-text bg-secondary p-1">
+                            {{product.description}}
+                            <button class="btn btn-success btn-sm float-end" (click)="addProductToCart(product)">
+                                Add to the Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-inline float-start mr-1">
+                        <select class="form-control" [value]="productsPerPage"
+                            (change)="changePageSize($any($event).target.value)">
+                            <option value="3">3 per page</option>
+                            <option value="6">6 per page</option>
+                            <option value="9">9 per page</option>
+                            <option value="12">12 per page</option>
+                        </select>
+                    </div>
+                    <div class="btn-group float-end">
+                        <button *counter="let page of pageCount" (click)="changePage(page)" class="btn btn-outline-primary" [class.active]="page == selectedPage">
+                            {{page}}
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
