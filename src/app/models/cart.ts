@@ -4,9 +4,9 @@ import { Product } from "./product";
 
 @Injectable()
 export class Cart {
-    private lines: CartLine[] = [];
-    private itemCount: number = 0;
-    private cartPrice: number = 0;
+    public lines: CartLine[] = [];
+    public itemCount: number = 0;
+    public cartPrice: number = 0;
 
     public addLine(product: Product, quantity: number = 1) {
         let line = this.lines.find(l => l.product.productId == product.productId);
