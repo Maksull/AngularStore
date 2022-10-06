@@ -10,7 +10,7 @@ import { ProductService } from "../services/product.service";
     selector: "app-root",
     templateUrl: "store.component.html"
 })
-export class StoreCompoent {
+export class StoreComponent {
     public title = "AngularStore";
     public selectedCategory: string | undefined;
     public productsPerPage: number = 6;
