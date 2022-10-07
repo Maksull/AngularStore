@@ -21,14 +21,14 @@ export class StoreComponent {
 
     public get products(): Product[] {
         this.pageIndex = (this.selectedPage - 1) * this.productsPerPage;
-        return this.productService.getProducts().slice(this.pageIndex, Number(this.pageIndex) + Number(this.productsPerPage));
+        return this.productService.getProducts(this.selectedCategory).slice(this.pageIndex, Number(this.pageIndex) + Number(this.productsPerPage));
     }
 
     public get categories(): Category[] {
         return this.categoryService.getCategories();
     }
 
-    public get pageCount(): Number {
+    public get pageCount(): number {
         return Math.ceil(this.productService.getProducts().length / this.productsPerPage)
     }
 
