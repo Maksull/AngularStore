@@ -7,8 +7,8 @@ import { AuthService } from "../services/auth.service";
 export class AuthGuard {
     public constructor(private router: Router, private authService: AuthService) { }
 
-    public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
-        if(!this.authService.isAuthenticated){
+    public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        if (!this.authService.isAuthenticated) {
             this.router.navigateByUrl("/admin/auth");
             return false;
         }
