@@ -3,6 +3,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { Category } from "src/app/models/category";
 import { CategoryService } from "src/app/services/category.service";
+import { ProductService } from "src/app/services/product.service";
 
 @Component({
     templateUrl: "categoryTable.component.html"
@@ -15,7 +16,7 @@ export class CategoryTableComponent {
     @ViewChild(MatPaginator)
     public paginator?: MatPaginator;
 
-    public constructor(private categoryService: CategoryService, differs: IterableDiffers) {
+    public constructor(private categoryService: CategoryService, differs: IterableDiffers, private productService: ProductService) {
         this.differ = differs.find(categoryService.getCategories()).create();
     }
 
@@ -34,5 +35,6 @@ export class CategoryTableComponent {
 
     public deleteCategory(id: number) {
         this.categoryService.deleteCategory(id);
+        this.productService.afterDeleteCategory(id);
     }
 }

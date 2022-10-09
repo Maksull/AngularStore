@@ -2,6 +2,7 @@ import { Component, IterableDiffer, IterableDiffers, ViewChild } from "@angular/
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { Supplier } from "src/app/models/supplier";
+import { ProductService } from "src/app/services/product.service";
 import { SupplierService } from "src/app/services/supplier.service";
 
 @Component({
@@ -12,7 +13,7 @@ export class SupplierTableComponent {
     public colsAndRows: string[] = ["supplierId", "name", "city", "quantity", "buttons"];
     public tableDataSource = new MatTableDataSource<Supplier>(this.supplierService.getSuppliers());
 
-    public constructor(private supplierService: SupplierService, private differs: IterableDiffers) {
+    public constructor(private supplierService: SupplierService, private differs: IterableDiffers, private productService: ProductService) {
         this.differ = differs.find(supplierService.getSuppliers()).create();
     }
 
@@ -34,5 +35,6 @@ export class SupplierTableComponent {
 
     public deleteSupplier(id: number) {
         this.supplierService.deleteSupplier(id);
+        this.productService.afterDeleteSupplier(id);
     }
 }
