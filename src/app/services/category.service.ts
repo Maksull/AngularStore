@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Category } from '../models/category';
+import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -26,19 +27,34 @@ export class CategoryService {
     if (category.categoryId == null || category.categoryId == 0) {
       this.http.post<Category>(`${environment.apiUrl}/${this.url}`, category, this.getOptions()).subscribe(c => this.categories.push(c));
     } else {
-      this.http.put<Category>(`${environment.apiUrl}/`, category, this.getOptions()).subscribe(c => {
+      this.http.put<Category>(`${environment.apiUrl}/${this.url}`, category, this.getOptions()).subscribe(c => {
         this.categories.splice(this.categories.findIndex(c => c.categoryId == category.categoryId), 1, category)
       })
     }
   }
 
-  public deleteCategory(id: number){
+  public deleteCategory(id: number) {
     this.http.delete<Category>(`${environment.apiUrl}/${this.url}/${id}`, this.getOptions()).subscribe(c => {
       this.categories.splice(this.categories.findIndex(c => c.categoryId == id), 1)
     });
   }
 
-  private getOptions(){
+  public afterCreateUpdateProduct(product: Product, lastCategoryId: number) {
+    this.categories.find(c => c.categoryId == lastCategoryId)?.products?.splice(
+      (this.categories.find(c => c.categoryId == lastCategoryId)?.products ?? []).findIndex(p => p.productId == product.productId), 1
+    );
+    this.categories.find(c => c.categoryId == product.categoryId)?.products?.push(product);
+  }
+
+  public afterDeleteProduct(product: Product | undefined) {
+    if (product != undefined) {
+      this.categories.find(c => c.categoryId == product.categoryId)?.products?.splice(
+        (this.categories.find(c => c.categoryId == product.categoryId)?.products ?? []).findIndex(p => p.productId == product.productId), 1
+      );
+    }
+  }
+
+  private getOptions() {
     return {
       headers: new HttpHeaders({
         "Authorization": `Bearer ${localStorage.getItem("token")}`

@@ -32,10 +32,18 @@ export class ProductService {
     }
   }
 
-  public deleteProduct(id: number){
+  public deleteProduct(id: number) {
     this.http.delete<Product>(`${environment.apiUrl}/${this.url}/${id}`, this.getOptions()).subscribe(p => {
       this.products.splice(this.products.findIndex(p => p.productId == id), 1)
     });
+  }
+
+  public afterDeleteCategory(id: number) {
+    this.products = this.products.filter(p => p.categoryId != id);
+  }
+
+  public afterDeleteSupplier(id: number) {
+    this.products = this.products.filter(p => p.supplierId != id);
   }
 
   private getOptions() {

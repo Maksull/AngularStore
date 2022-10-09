@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Product } from '../models/product';
 import { Supplier } from '../models/supplier';
 
 @Injectable({
@@ -32,10 +33,25 @@ export class SupplierService {
     }
   }
 
-  public deleteSupplier(id: number){
+  public deleteSupplier(id: number) {
     this.http.delete<Supplier>(`${environment.apiUrl}/${this.url}/${id}`, this.getOptions()).subscribe(s => {
       this.suppliers.splice(this.suppliers.findIndex(s => s.supplierId == id), 1)
     })
+  }
+
+  public afterCreateUpdateProduct(product: Product, lastSupplierId: number) {
+    this.suppliers.find(s => s.supplierId == lastSupplierId)?.products?.splice(
+      (this.suppliers.find(s => s.supplierId == lastSupplierId)?.products ?? []).findIndex(p => p.productId == product.productId), 1
+    );
+    this.suppliers.find(s => s.supplierId == product.supplierId)?.products?.push(product);
+  }
+
+  public afterDeleteProduct(product: Product | undefined) {
+    if (product != undefined) {
+      this.suppliers.find(s => s.supplierId == product.supplierId)?.products?.splice(
+        (this.suppliers.find(s => s.supplierId == product.supplierId)?.products ?? []).findIndex(p => p.productId == product.productId), 1
+      );
+    }
   }
 
   private getOptions() {
