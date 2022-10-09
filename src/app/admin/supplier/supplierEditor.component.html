@@ -1,0 +1,21 @@
+<h3 class="heading">{{editing ? "Edit" : "Create"}} a Supplier</h3>
+<form (ngSubmit)="save()">
+    <mat-form-field *ngIf="editing">
+        <mat-label>ID</mat-label>
+        <input mat-input name="id" [(ngModel)]="supplier.supplierId" disabled />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input mat-input name="name" [(ngModel)]="supplier.name" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>City</mat-label>
+        <input mat-input name="city" [(ngModel)]="supplier.city" />
+    </mat-form-field>
+    <button type="submit" mat-flat-button color="primary">
+        {{editing ? "Save" : "Create"}}
+    </button>
+    <button type="reset" mat-stroked-button routerLink="/admin/main/suppliers">
+        Cancel
+    </button>
+</form>
