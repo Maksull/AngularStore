@@ -1,0 +1,17 @@
+<h3 class="heading">{{editing ? "Edit" : "Create"}} a Category</h3>
+<form (ngSubmit)="save()">
+    <mat-form-field *ngIf="editing">
+        <mat-label>ID</mat-label>
+        <input matInput name="id" [(ngModel)]="category.categoryId" disabled/>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput name="name" [(ngModel)]="category.name" />
+    </mat-form-field>
+    <button type="submit" mat-flat-button color="primary">
+        {{editing ? "Save" : "Create"}}
+    </button>
+    <button type="reset" mat-stroked-button routerLink="/admin/main/categories">
+        Cancel
+    </button>
+</form>
