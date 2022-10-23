@@ -1,5 +1,6 @@
 import { Component, IterableDiffer, IterableDiffers, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { Category } from "src/app/models/category";
 import { CategoryService } from "src/app/services/category.service";
@@ -15,6 +16,8 @@ export class CategoryTableComponent {
 
     @ViewChild(MatPaginator)
     public paginator?: MatPaginator;
+    @ViewChild(MatSort)
+    public sort?: MatSort;
 
     public constructor(private categoryService: CategoryService, differs: IterableDiffers, private productService: ProductService) {
         this.differ = differs.find(categoryService.getCategories()).create();
@@ -31,10 +34,17 @@ export class CategoryTableComponent {
         if (this.paginator) {
             this.tableDataSource.paginator = this.paginator;
         }
+        if (this.sort) {
+            this.tableDataSource.sort = this.sort;
+        }
     }
 
     public deleteCategory(id: number) {
         this.categoryService.deleteCategory(id);
         this.productService.afterDeleteCategory(id);
+    }
+
+    public changeSearch(selectedSearch: string) {
+        this.tableDataSource.data = this.categoryService.getCategories().filter(c => c.name?.includes(selectedSearch))
     }
 }

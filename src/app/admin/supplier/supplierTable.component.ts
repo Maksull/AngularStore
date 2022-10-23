@@ -1,5 +1,6 @@
 import { Component, IterableDiffer, IterableDiffers, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { Supplier } from "src/app/models/supplier";
 import { ProductService } from "src/app/services/product.service";
@@ -19,6 +20,8 @@ export class SupplierTableComponent {
 
     @ViewChild(MatPaginator)
     public paginator?: MatPaginator;
+    @ViewChild(MatSort)
+    public sort?: MatSort;
 
     public ngDoCheck() {
         let changes = this.differ.diff(this.supplierService.getSuppliers());
@@ -31,10 +34,17 @@ export class SupplierTableComponent {
         if (this.paginator) {
             this.tableDataSource.paginator = this.paginator;
         }
+        if (this.sort) {
+            this.tableDataSource.sort = this.sort;
+        }
     }
 
     public deleteSupplier(id: number) {
         this.supplierService.deleteSupplier(id);
         this.productService.afterDeleteSupplier(id);
+    }
+
+    public changeSearch(selectedSearch: string) {
+        this.tableDataSource.data = this.supplierService.getSuppliers().filter(s => s.name?.includes(selectedSearch))
     }
 }

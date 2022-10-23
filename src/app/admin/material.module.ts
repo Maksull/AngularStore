@@ -11,10 +11,11 @@ import { MatInputModule } from "@angular/material/input";
 import { MatOptionModule } from "@angular/material/core";
 import { MatSelectModule } from "@angular/material/select";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatSortModule } from "@angular/material/sort";
 
 
 const features: any[] = [MatToolbarModule, MatIconModule, MatSidenavModule, MatButtonModule, MatDividerModule, MatTableModule, MatPaginatorModule,
-    MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatCheckboxModule];
+    MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatCheckboxModule, MatSortModule];
 
 @NgModule({
     imports: [features],

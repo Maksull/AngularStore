@@ -1,8 +1,18 @@
-<table mat-table [dataSource]="tableDataSource">
-    <mat-text-column name="categoryId"></mat-text-column>
-    <mat-text-column name="name"></mat-text-column>
+<mat-form-field>
+    <input matInput type="text" class="form-control" placeholder="Search"
+        (keyup)="changeSearch($any($event).target.value)" />
+</mat-form-field>
+<table mat-table matSort [dataSource]="tableDataSource">
+    <ng-container matColumnDef="categoryId">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>CategoryId</th>
+        <td mat-cell *matCellDef="let item"> {{item.categoryId}} </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let item"> {{item.name}} </td>
+    </ng-container>
     <ng-container matColumnDef="quantity">
-        <th mat-header-cell *matHeaderCellDef>Products quantity</th>
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Products quantity</th>
         <td mat-cell *matCellDef="let item"> {{item.products.length}} </td>
     </ng-container>
     <ng-container matColumnDef="buttons">
