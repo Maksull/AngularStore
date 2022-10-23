@@ -13,15 +13,68 @@ import { ProductService } from "../services/product.service";
 export class StoreComponent {
     public title = "AngularStore";
     public selectedCategory: string | undefined;
+    public selectedSearch: string = "";
+    public selectedSort?: string = undefined;
     public productsPerPage: number = 6;
     public selectedPage: number = 1;
+    public isFromLower?: boolean = undefined;
     private pageIndex: number = 0;
 
     public constructor(private productService: ProductService, private categoryService: CategoryService, private cart: Cart, private router: Router) { }
 
     public get products(): Product[] {
         this.pageIndex = (this.selectedPage - 1) * this.productsPerPage;
-        return this.productService.getProducts(this.selectedCategory).slice(this.pageIndex, Number(this.pageIndex) + Number(this.productsPerPage));
+
+        if (this.selectedSort != undefined && this.selectedSearch != "") {
+            const selectedSortProperty = this.selectedSort as keyof Product;
+            const isFromLower: boolean = this.isFromLower ?? false;
+
+            return this.productService.getProducts(this.selectedCategory).filter(p => p.name?.includes(this.selectedSearch)).sort(function (x, y) {
+                if (isFromLower) {
+                    if (x[selectedSortProperty]! > y[selectedSortProperty]!) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                }
+                else {
+                    if (x[selectedSortProperty]! < y[selectedSortProperty]!) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                }
+
+            }).slice(this.pageIndex, Number(this.pageIndex) + Number(this.productsPerPage));
+        }
+        else if (this.selectedSort != undefined) {
+            const selectedSortProperty = this.selectedSort as keyof Product;
+            const isFromLower: boolean = this.isFromLower ?? false;
+
+            return this.productService.getProducts(this.selectedCategory).sort(function (x, y) {
+                if (isFromLower) {
+                    if (x[selectedSortProperty]! > y[selectedSortProperty]!) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                }
+                else {
+                    if (x[selectedSortProperty]! < y[selectedSortProperty]!) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                }
+
+            }).slice(this.pageIndex, Number(this.pageIndex) + Number(this.productsPerPage));
+        }
+        else if (this.selectedSearch != "") {
+            return this.productService.getProducts(this.selectedCategory).filter(p => p.name?.includes(this.selectedSearch)).slice(this.pageIndex, Number(this.pageIndex) + Number(this.productsPerPage));
+        }
+        else {
+            return this.productService.getProducts(this.selectedCategory).slice(this.pageIndex, Number(this.pageIndex) + Number(this.productsPerPage));
+        }
     }
 
     public get categories(): Category[] {
@@ -29,6 +82,9 @@ export class StoreComponent {
     }
 
     public get pageCount(): number {
+        if (this.selectedSearch != "") {
+            return Math.ceil(this.productService.getProducts().filter(p => p.name?.includes(this.selectedSearch)).length / this.productsPerPage)
+        }
         return Math.ceil(this.productService.getProducts().length / this.productsPerPage)
     }
 
@@ -48,5 +104,28 @@ export class StoreComponent {
     public addProductToCart(product: Product) {
         this.cart.addLine(product);
         this.router.navigateByUrl("cart");
+    }
+
+    public changeSearch(selectedSearch: string) {
+        this.selectedSearch = selectedSearch;
+    }
+
+    public changeSort(selectedSort: string) {
+        this.selectedSort = selectedSort;
+    }
+
+    public changeDirection(selectedDirection: string) {
+        if (selectedDirection == 'true') {
+            this.isFromLower = true;
+        }
+        else {
+            this.isFromLower = false;
+        }
+    }
+
+    public reset(){
+        this.selectedSort = undefined;
+        this.selectedSearch = '';
+        this.isFromLower = undefined;
     }
 }
