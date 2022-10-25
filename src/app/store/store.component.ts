@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { environment } from "src/environments/environment";
 import { Cart } from "../models/cart";
 import { Category } from "../models/category";
 import { Product } from "../models/product";
@@ -83,12 +84,13 @@ export class StoreComponent {
 
     public get pageCount(): number {
         if (this.selectedSearch != "") {
-            return Math.ceil(this.productService.getProducts().filter(p => p.name?.includes(this.selectedSearch)).length / this.productsPerPage)
+            return Math.ceil(this.productService.getProducts(this.selectedCategory).filter(p => p.name?.includes(this.selectedSearch)).length / this.productsPerPage)
         }
-        return Math.ceil(this.productService.getProducts().length / this.productsPerPage)
+        return Math.ceil(this.productService.getProducts(this.selectedCategory).length / this.productsPerPage)
     }
 
     public changeCategory(newCategory?: string) {
+        this.selectedPage = 1;
         this.selectedCategory = newCategory;
     }
 
