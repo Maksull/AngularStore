@@ -16,25 +16,25 @@
             <mat-label>Username</mat-label>
             <input matInput class="form-control" #name="ngModel" name="name" [(ngModel)]="order.name" required/>
         </mat-form-field>
-        <span *ngIf="isSubmitted && name.invalid" class="text-danger">
+        <span *ngIf="name.touched && name.invalid || isSubmitted && name.invalid" class="text-danger">
             Please enter your name
         </span>
     </div>
     <div class="form-group">
         <mat-form-field>
             <mat-label>Email</mat-label>
-            <input matInput class="form-control" #name="ngModel" name="email" [(ngModel)]="order.email" required />
+            <input matInput class="form-control" #email="ngModel" type="email" email name="email" [(ngModel)]="order.email" required />
         </mat-form-field>
-        <span *ngIf="isSubmitted && name.invalid" class="text-danger">
-            Please enter your email
+        <span *ngIf="email.touched && email.invalid || isSubmitted && email.invalid" class="text-danger">
+            Please enter valid email
         </span>
     </div>
     <div class="form-group">
         <mat-form-field>
             <mat-label>Address</mat-label>
-            <input matInput class="form-control" #address="ngModel" name="address" [(ngModel)]="order.address" required />
+            <input matInput class="form-control" #address="ngModel"  name="address" [(ngModel)]="order.address" required />
         </mat-form-field>
-        <span *ngIf="isSubmitted && address.invalid" class="text-danger">
+        <span *ngIf="address.touched && address.invalid || isSubmitted && address.invalid" class="text-danger">
             Please enter your address
         </span>
     </div>
@@ -43,7 +43,7 @@
             <mat-label>City</mat-label>
             <input matInput class="form-control" #city="ngModel" name="city" [(ngModel)]="order.city" required />
         </mat-form-field>
-        <span *ngIf="isSubmitted && city.invalid" class="text-danger">
+        <span *ngIf="city.touched && city.invalid || isSubmitted && city.invalid" class="text-danger">
             Please enter your city
         </span>
     </div>
@@ -52,7 +52,7 @@
             <mat-label>Country</mat-label>
             <input matInput class="form-control" #country="ngModel" name="country" [(ngModel)]="order.country" required />
         </mat-form-field>
-        <span *ngIf="isSubmitted && country.invalid" class="text-danger">
+        <span *ngIf="country.touched && country.invalid || isSubmitted && country.invalid" class="text-danger">
             Please enter your country
         </span>
     </div>
@@ -61,7 +61,7 @@
             <mat-label>Zip/Postal Code</mat-label>
             <input matInput class="form-control" #zip="ngModel" name="zip" [(ngModel)]="order.zip" required />
         </mat-form-field>
-        <span *ngIf="isSubmitted && zip.invalid" class="text-danger">
+        <span *ngIf="zip.touched && zip.invalid || isSubmitted && zip.invalid" class="text-danger">
             Please enter your zip/postal code
         </span>
     </div>

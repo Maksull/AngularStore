@@ -26,52 +26,17 @@ export class StoreComponent {
     public get products(): Product[] {
         this.pageIndex = (this.selectedPage - 1) * this.productsPerPage;
 
-        if (this.selectedSort != undefined && this.selectedSearch != "") {
-            const selectedSortProperty = this.selectedSort as keyof Product;
-            const isFromLower: boolean = this.isFromLower ?? false;
-
-            return this.productService.getProducts(this.selectedCategory).filter(p => p.name?.includes(this.selectedSearch)).sort(function (x, y) {
-                if (isFromLower) {
-                    if (x[selectedSortProperty]! > y[selectedSortProperty]!) {
-                        return 1;
-                    } else {
-                        return -1;
-                    }
-                }
-                else {
-                    if (x[selectedSortProperty]! < y[selectedSortProperty]!) {
-                        return 1;
-                    } else {
-                        return -1;
-                    }
-                }
-
-            }).slice(this.pageIndex, Number(this.pageIndex) + Number(this.productsPerPage));
-        }
-        else if (this.selectedSort != undefined) {
-            const selectedSortProperty = this.selectedSort as keyof Product;
-            const isFromLower: boolean = this.isFromLower ?? false;
-
-            return this.productService.getProducts(this.selectedCategory).sort(function (x, y) {
-                if (isFromLower) {
-                    if (x[selectedSortProperty]! > y[selectedSortProperty]!) {
-                        return 1;
-                    } else {
-                        return -1;
-                    }
-                }
-                else {
-                    if (x[selectedSortProperty]! < y[selectedSortProperty]!) {
-                        return 1;
-                    } else {
-                        return -1;
-                    }
-                }
-
-            }).slice(this.pageIndex, Number(this.pageIndex) + Number(this.productsPerPage));
+        if (this.selectedSearch != "" && this.selectedSort != undefined) {
+            return this.productService.getProducts(this.selectedCategory).filter(p => p.name?.includes(this.selectedSearch)).sort((x, y) => this.sort(x, y))
+                .slice(this.pageIndex, Number(this.pageIndex) + Number(this.productsPerPage));
         }
         else if (this.selectedSearch != "") {
-            return this.productService.getProducts(this.selectedCategory).filter(p => p.name?.includes(this.selectedSearch)).slice(this.pageIndex, Number(this.pageIndex) + Number(this.productsPerPage));
+            return this.productService.getProducts(this.selectedCategory).filter(p => p.name?.includes(this.selectedSearch))
+                .slice(this.pageIndex, Number(this.pageIndex) + Number(this.productsPerPage));
+        }
+        else if (this.selectedSort != undefined) {
+            return this.productService.getProducts(this.selectedCategory).sort((x, y) => this.sort(x, y))
+                .slice(this.pageIndex, Number(this.pageIndex) + Number(this.productsPerPage));
         }
         else {
             return this.productService.getProducts(this.selectedCategory).slice(this.pageIndex, Number(this.pageIndex) + Number(this.productsPerPage));
@@ -125,9 +90,28 @@ export class StoreComponent {
         }
     }
 
-    public reset(){
+    public reset() {
         this.selectedSort = undefined;
         this.selectedSearch = '';
         this.isFromLower = undefined;
+    }
+
+    private sort(x: Product, y: Product) {
+        const selectedSortProperty = this.selectedSort as keyof Product;
+
+        if (this.isFromLower) {
+            if (x[selectedSortProperty]! > y[selectedSortProperty]!) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+        else {
+            if (x[selectedSortProperty]! < y[selectedSortProperty]!) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
     }
 }
