@@ -1,3 +1,4 @@
+import { _isNumberValue } from "@angular/cdk/coercion";
 import { Component, IterableDiffer, IterableDiffers, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
@@ -11,7 +12,7 @@ import { ProductService } from "src/app/services/product.service";
 })
 export class CategoryTableComponent {
     private differ: IterableDiffer<Category>;
-    public colsAndRows: string[] = ["categoryId", "name", "quantity", "buttons"];
+    public colsAndRows: string[] = ["categoryId", "name", "products.length", "buttons"];
     public tableDataSource = new MatTableDataSource<Category>(this.categoryService.getCategories());
 
     @ViewChild(MatPaginator)
@@ -35,6 +36,20 @@ export class CategoryTableComponent {
             this.tableDataSource.paginator = this.paginator;
         }
         if (this.sort) {
+            this.tableDataSource.sortingDataAccessor =
+                (data: any, sortHeaderId: string): string | number => {
+                    let value: any = null;
+                    if (sortHeaderId.includes('.')) {
+                        const ids = sortHeaderId.split('.');
+                        value = data;
+                        ids.forEach(function (x) {
+                            value = value ? value[x] : null;
+                        });
+                    } else {
+                        value = data[sortHeaderId];
+                    }
+                    return _isNumberValue(value) ? Number(value) : value;
+                };
             this.tableDataSource.sort = this.sort;
         }
     }

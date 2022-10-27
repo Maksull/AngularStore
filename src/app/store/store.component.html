@@ -11,11 +11,11 @@
 <mat-sidenav-container [hasBackdrop]="false">
     <mat-sidenav mode="over" #sidenav="matSidenav" class="mat-elevation-z8">
         <button mat-button class="menu-button" [class.mat-accent]="selectedCategory == undefined"
-            (click)="changeCategory()">
+            (click)="changeCategory()" (click)="sidenav.toggle()">
             Home
         </button>
         <button mat-button class="menu-button" *ngFor="let cat of categories"
-            [class.mat-accent]="cat.name == selectedCategory" (click)="changeCategory(cat.name)">
+            [class.mat-accent]="cat.name == selectedCategory" (click)="changeCategory(cat.name)" (click)="sidenav.toggle()">
             {{cat.name}}
         </button>
         <mat-divider></mat-divider>

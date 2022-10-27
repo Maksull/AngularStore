@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { environment } from "src/environments/environment";
 import { Cart } from "../models/cart";
 import { Category } from "../models/category";
 import { Product } from "../models/product";
