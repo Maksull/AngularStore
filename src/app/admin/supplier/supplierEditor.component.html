@@ -1,21 +1,39 @@
-<h3 class="heading">{{editing ? "Edit" : "Create"}} a Supplier</h3>
-<form (ngSubmit)="save()">
-    <mat-form-field *ngIf="editing">
-        <mat-label>ID</mat-label>
-        <input matInput name="id" [(ngModel)]="supplier.supplierId" disabled />
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput name="name" [(ngModel)]="supplier.name" />
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>City</mat-label>
-        <input matInput name="city" [(ngModel)]="supplier.city" />
-    </mat-form-field>
-    <button type="submit" mat-flat-button color="primary">
-        {{editing ? "Save" : "Create"}}
-    </button>
-    <button type="reset" mat-stroked-button routerLink="/admin/main/suppliers">
-        Cancel
-    </button>
-</form>
+<mat-card class="create-edit">
+    <mat-card-title class="text-center">{{editing ? "Edit" : "Create"}} a Supplier</mat-card-title>
+    <mat-card-content>
+        <form #form="ngForm" (ngSubmit)="save(form)">
+            <div class="form-group">
+                <mat-form-field *ngIf="editing">
+                    <mat-label>ID</mat-label>
+                    <input matInput name="id" [(ngModel)]="supplier.supplierId" disabled />
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input matInput class="form-control" #name="ngModel" name="name" [(ngModel)]="supplier.name"
+                        required />
+                </mat-form-field>
+                <span *ngIf="name.touched && name.invalid || isSubmitted && name.invalid" class="text-danger">
+                    Please enter the name
+                </span>
+            </div>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>City</mat-label>
+                    <input matInput class="form-control" #city="ngModel" name="city" [(ngModel)]="supplier.city"
+                        required />
+                </mat-form-field>
+                <span *ngIf="city.touched && city.invalid || isSubmitted && city.invalid" class="text-danger">
+                    Please enter the name
+                </span>
+            </div>
+            <button type="submit" mat-flat-button color="primary">
+                {{editing ? "Save" : "Create"}}
+            </button>
+            <button type="reset" mat-stroked-button routerLink="/admin/main/suppliers">
+                Cancel
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

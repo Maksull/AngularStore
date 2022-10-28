@@ -1,66 +1,80 @@
-<h3 class="heading">{{editing ? "Edit" : "Create"}} a Product</h3>
-<form #form="ngForm" (ngSubmit)="save(form)">
-    <div class="form-group">
-        <mat-form-field *ngIf="editing">
-            <mat-label>ID</mat-label>
-            <input matInput class="form-control" name="id" [(ngModel)]="product.productId" disabled />
-        </mat-form-field>
-    </div>
-    <div class="form-group">
-        <mat-form-field>
-            <mat-label>Name</mat-label>
-            <input matInput class="form-control" #name="ngModel" name="name" [(ngModel)]="product.name" required />
-        </mat-form-field>
-        <span *ngIf="name.touched && name.invalid || isSubmitted && name.invalid" class="text-danger">
-            Please enter the name
-        </span>
-    </div>
-    <div class="form-group">
-        <mat-form-field>
-            <mat-label>Category</mat-label>
-            <mat-select #category="ngModel" name="category" [(ngModel)]="selectedCategoryId" required>
-                <mat-option *ngFor="let cat of categories" name="category" [value]="cat.categoryId">{{cat.name}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <span *ngIf="category.touched && category.invalid || isSubmitted && category.invalid" class="text-danger">
-            Please choose the category
-        </span>
-    </div>
-    <div class="form-group">
-        <mat-form-field>
-            <mat-label>Supplier</mat-label>
-            <mat-select #supplier="ngModel" name="supplier" [(ngModel)]="selectedSupplierId" required>
-                <mat-option *ngFor="let sup of suppliers" name="category" [value]="sup.supplierId">{{sup.name}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <span *ngIf="supplier.touched && supplier.invalid || isSubmitted && supplier.invalid" class="text-danger">
-            Please choose the supplier
-        </span>
-    </div>
-    <div class="form-group">
-        <mat-form-field>
-            <mat-label>Description</mat-label>
-            <input matInput class="form-control" #description="ngModel" name="description" [(ngModel)]="product.description" required />
-        </mat-form-field>
-        <span *ngIf="description.touched && description.invalid || isSubmitted && description.invalid" class="text-danger">
-            Please enter the description
-        </span>
-    </div>
-    <div class="form-group">
-        <mat-form-field>
-            <mat-label>Price</mat-label>
-            <input matInput class="form-control" #price="ngModel" type="number" name="price" [(ngModel)]="product.price" required />
-        </mat-form-field>
-        <span *ngIf="price.touched && price.invalid || isSubmitted && price.invalid" class="text-danger">
-            Please enter the price
-        </span>
-    </div>
-    <button type="submit" mat-flat-button color="primary">
-        {{editing ? "Save" : "Create"}}
-    </button>
-    <button type="reset" mat-stroked-button routerLink="/admin/main/products">
-        Cancel
-    </button>
-</form>
+<mat-card class="create-edit">
+    <mat-card-title class="text-center">{{editing ? "Edit" : "Create"}} a Product</mat-card-title>
+    <mat-card-content>
+        <form #form="ngForm" (ngSubmit)="save(form)">
+            <div class="form-group">
+                <mat-form-field *ngIf="editing">
+                    <mat-label>ID</mat-label>
+                    <input matInput class="form-control" name="id" [(ngModel)]="product.productId" disabled />
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input matInput class="form-control" #name="ngModel" name="name" [(ngModel)]="product.name" required />
+                </mat-form-field>
+                <span *ngIf="name.touched && name.invalid || isSubmitted && name.invalid" class="text-danger">
+                    Please enter the name
+                </span>
+            </div>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Category</mat-label>
+                    <mat-select #category="ngModel" name="category" [(ngModel)]="selectedCategoryId" required>
+                        <mat-option *ngFor="let cat of categories" name="category" [value]="cat.categoryId">{{cat.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <span *ngIf="category.touched && category.invalid || isSubmitted && category.invalid" class="text-danger">
+                    Please choose the category
+                </span>
+            </div>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Supplier</mat-label>
+                    <mat-select #supplier="ngModel" name="supplier" [(ngModel)]="selectedSupplierId" required>
+                        <mat-option *ngFor="let sup of suppliers" name="category" [value]="sup.supplierId">{{sup.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <span *ngIf="supplier.touched && supplier.invalid || isSubmitted && supplier.invalid" class="text-danger">
+                    Please choose the supplier
+                </span>
+            </div>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Description</mat-label>
+                    <input matInput class="form-control" #description="ngModel" name="description"
+                        [(ngModel)]="product.description" required />
+                </mat-form-field>
+                <span *ngIf="description.touched && description.invalid || isSubmitted && description.invalid"
+                    class="text-danger">
+                    Please enter the description
+                </span>
+            </div>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Price</mat-label>
+                    <input matInput class="form-control" #price="ngModel" type="number" name="price" [(ngModel)]="product.price"
+                        required />
+                </mat-form-field>
+                <span *ngIf="price.touched && price.invalid || isSubmitted && price.invalid" class="text-danger">
+                    Please enter the price
+                </span>
+            </div>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Choose a File</mat-label>
+                    <ngx-mat-file-input accept=".png"></ngx-mat-file-input>
+                    <mat-hint>Choose one image for the product</mat-hint>
+                 </mat-form-field>
+            </div>
+            <button type="submit" mat-flat-button color="primary">
+                {{editing ? "Save" : "Create"}}
+            </button>
+            <button type="reset" mat-stroked-button routerLink="/admin/main/products">
+                Cancel
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

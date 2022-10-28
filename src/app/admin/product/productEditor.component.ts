@@ -52,6 +52,5 @@ export class ProductEditorComponent {
             this.supplierService.afterCreateUpdateProduct(this.product, this.lastSupplierId);
             this.router.navigateByUrl("/admin/main/products");
         }
-
     }
 }

@@ -10,11 +10,11 @@
         <form novalidate #form="ngForm" (ngSubmit)="authenticate(form)">
             <mat-form-field>
                 <mat-label>Username</mat-label>
-                <input matInput type="text" name="username" [(ngModel)]="username" required />
+                <input matInput class="form-control" type="text" name="username" [(ngModel)]="username" required />
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Password</mat-label>
-                <input matInput type="password" name="password" [(ngModel)]="password" required />
+                <input matInput class="form-control" type="password" name="password" [(ngModel)]="password" required />
             </mat-form-field>
             <div class="bg-danger mt-2 p-2 text-center text-white" *ngIf="errorMessage != null">
                 {{errorMessage}}
