@@ -132,5 +132,9 @@ table.orders table td:first-of-type {
     margin: 0;
     padding: 0;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.login {
+    margin: auto;
+    top: 15%;
+    width: 35%;
+    padding: 1.5em;
+}
