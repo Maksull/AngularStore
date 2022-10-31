@@ -1,32 +1,30 @@
 <mat-card class="create-edit">
     <mat-card-title class="text-center">{{editing ? "Edit" : "Create"}} a Supplier</mat-card-title>
     <mat-card-content>
-        <form #form="ngForm" (ngSubmit)="save(form)">
+        <form [formGroup]="supplierEditorForm" (ngSubmit)="save()">
             <div class="form-group">
                 <mat-form-field *ngIf="editing">
                     <mat-label>ID</mat-label>
-                    <input matInput name="id" [(ngModel)]="supplier.supplierId" disabled />
+                    <input matInput name="id" formControlName="supplierId" />
                 </mat-form-field>
             </div>
             <div class="form-group">
                 <mat-form-field>
                     <mat-label>Name</mat-label>
-                    <input matInput class="form-control" #name="ngModel" name="name" [(ngModel)]="supplier.name"
-                        required />
+                    <input matInput class="form-control" formControlName="name" />
                 </mat-form-field>
-                <span *ngIf="name.touched && name.invalid || isSubmitted && name.invalid" class="text-danger">
+                <mat-error *ngIf="name!.touched && name!.invalid || isSubmitted && name!.invalid">
                     Please enter the name
-                </span>
+                </mat-error>
             </div>
             <div class="form-group">
                 <mat-form-field>
                     <mat-label>City</mat-label>
-                    <input matInput class="form-control" #city="ngModel" name="city" [(ngModel)]="supplier.city"
-                        required />
+                    <input matInput class="form-control" formControlName="city" />
                 </mat-form-field>
-                <span *ngIf="city.touched && city.invalid || isSubmitted && city.invalid" class="text-danger">
+                <mat-error *ngIf="city!.touched && city!.invalid || isSubmitted && city!.invalid">
                     Please enter the name
-                </span>
+                </mat-error>
             </div>
             <button type="submit" mat-flat-button color="primary">
                 {{editing ? "Save" : "Create"}}

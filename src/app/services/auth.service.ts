@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { LoginDto } from '../models/dto/loginDto';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,8 @@ export class AuthService {
 
   public constructor(private http: HttpClient) { }
 
-  public authenticate(username: string, password: string) {
-    return this.http.post<any>(`${environment.apiUrl}/${this.url}/login`, {
-      username: username, password: password
-    });
+  public authenticate(loginDto: LoginDto) {
+    return this.http.post<any>(`${environment.apiUrl}/${this.url}/login`, loginDto);
   }
 
   public get isAuthenticated(): boolean {

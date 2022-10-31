@@ -1,8 +1,9 @@
-import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
-import { Component, Input } from "@angular/core";
-import { NgForm } from "@angular/forms";
+import { HttpErrorResponse } from "@angular/common/http";
+import { Component } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthResponseDto } from "../models/dto/authResponseDto";
+import { LoginDto } from "../models/dto/loginDto";
 import { AuthService } from "../services/auth.service";
 
 @Component({
@@ -10,14 +11,18 @@ import { AuthService } from "../services/auth.service";
 })
 export class AuthComponent {
     public errorMessage?: string;
-    public username?: string;
-    public password?: string;
 
-    public constructor(private router: Router, private authService: AuthService) { }
+    public authForm: FormGroup;
 
-    public authenticate(form: NgForm) {
-        if (form.valid) {
-            this.authService.authenticate(this.username ?? "", this.password ?? "").
+    public constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
+        this.authForm = this.generateForm();
+    }
+
+    public authenticate() {
+        if (this.authForm.valid) {
+            let loginDto = new LoginDto;
+            loginDto = this.authForm.getRawValue();
+            this.authService.authenticate(loginDto).
                 subscribe({
                     next: (res: AuthResponseDto) => {
                         this.authService.authToken = res.token;
@@ -31,5 +36,12 @@ export class AuthComponent {
         } else {
             this.errorMessage = "Form data is invalid"
         }
+    }
+
+    private generateForm() {
+        return this.fb.group({
+            username: ['', Validators.required],
+            password: ['', Validators.required]
+        });
     }
 }

@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { AuthGuard } from "../guards/authGuard.guard";
@@ -15,7 +15,7 @@ import { SupplierEditorComponent } from "./supplier/supplierEditor.component";
 import { SupplierTableComponent } from "./supplier/supplierTable.component";
 
 @NgModule({
-    imports: [MaterialFeatures, RouterModule, FormsModule, BrowserModule],
+    imports: [MaterialFeatures, RouterModule, FormsModule, BrowserModule, ReactiveFormsModule],
     declarations: [AdminComponent, AuthComponent,
         ProductTableComponent, ProductEditorComponent,
         CategoryTableComponent, CategoryEditorComponent,

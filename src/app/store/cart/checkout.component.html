@@ -10,63 +10,68 @@
     <p>We'll ship your goods as soon as possible.</p>
     <button class="btn btn-primary" routerLink="/store">Return to Store</button>
 </div>
-<form *ngIf="!isOrderSent" #form="ngForm" novalidate (ngSubmit)="submitOrder(form)" class="m-2">
-    <div class="form-group">
-        <mat-form-field>
-            <mat-label>Username</mat-label>
-            <input matInput class="form-control" #name="ngModel" name="name" [(ngModel)]="order.name" required/>
-        </mat-form-field>
-        <span *ngIf="name.touched && name.invalid || isSubmitted && name.invalid" class="text-danger">
-            Please enter your name
-        </span>
-    </div>
-    <div class="form-group">
-        <mat-form-field>
-            <mat-label>Email</mat-label>
-            <input matInput class="form-control" #email="ngModel" type="email" email name="email" [(ngModel)]="order.email" required />
-        </mat-form-field>
-        <span *ngIf="email.touched && email.invalid || isSubmitted && email.invalid" class="text-danger">
-            Please enter valid email
-        </span>
-    </div>
-    <div class="form-group">
-        <mat-form-field>
-            <mat-label>Address</mat-label>
-            <input matInput class="form-control" #address="ngModel"  name="address" [(ngModel)]="order.address" required />
-        </mat-form-field>
-        <span *ngIf="address.touched && address.invalid || isSubmitted && address.invalid" class="text-danger">
-            Please enter your address
-        </span>
-    </div>
-    <div class="form-group">
-        <mat-form-field>
-            <mat-label>City</mat-label>
-            <input matInput class="form-control" #city="ngModel" name="city" [(ngModel)]="order.city" required />
-        </mat-form-field>
-        <span *ngIf="city.touched && city.invalid || isSubmitted && city.invalid" class="text-danger">
-            Please enter your city
-        </span>
-    </div>
-    <div class="form-group">
-        <mat-form-field>
-            <mat-label>Country</mat-label>
-            <input matInput class="form-control" #country="ngModel" name="country" [(ngModel)]="order.country" required />
-        </mat-form-field>
-        <span *ngIf="country.touched && country.invalid || isSubmitted && country.invalid" class="text-danger">
-            Please enter your country
-        </span>
-    </div>
-    <div class="form-group">
-        <mat-form-field>
-            <mat-label>Zip/Postal Code</mat-label>
-            <input matInput class="form-control" #zip="ngModel" name="zip" [(ngModel)]="order.zip" required />
-        </mat-form-field>
-        <span *ngIf="zip.touched && zip.invalid || isSubmitted && zip.invalid" class="text-danger">
-            Please enter your zip/postal code
-        </span>
-    </div>
-    <div>
-        <button class="btn btn-secondary m-1" routerLink="/cart">Back</button>
-        <button class="btn btn-primary m-1" type="submit">Complete order</button>
-    </div>
-</form>
+<mat-card *ngIf="!isOrderSent" class="checkout">
+    <mat-card-title class="text-center">Checkout</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="checkoutForm" (ngSubmit)="submitOrder()" class="m-2">
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input matInput class="form-control" formControlName="name" />
+                </mat-form-field>
+                <mat-error *ngIf="name!.touched && name!.invalid || isSubmitted && name!.invalid">
+                    Please enter the name
+                </mat-error>
+            </div>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput class="form-control" type="email" email formControlName="email" />
+                </mat-form-field>
+                <mat-error *ngIf="email!.touched && email!.invalid || isSubmitted && email!.invalid">
+                    Please enter valid email
+                </mat-error>
+            </div>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Address</mat-label>
+                    <input matInput class="form-control" formControlName="address" />
+                </mat-form-field>
+                <mat-error *ngIf="address!.touched && address!.invalid || isSubmitted && address!.invalid">
+                    Please enter your address
+                </mat-error>
+            </div>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>City</mat-label>
+                    <input matInput class="form-control" formControlName="city" />
+                </mat-form-field>
+                <mat-error *ngIf="city!.touched && city!.invalid || isSubmitted && city!.invalid">
+                    Please enter the city
+                </mat-error>
+            </div>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Country</mat-label>
+                    <input matInput class="form-control" formControlName="country" />
+                </mat-form-field>
+                <mat-error *ngIf="country!.touched && country!.invalid || isSubmitted && country!.invalid">
+                    Please enter the country
+                </mat-error>
+            </div>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Zip/Postal Code</mat-label>
+                    <input matInput class="form-control" formControlName="zip" />
+                </mat-form-field>
+                <mat-error *ngIf="zip!.touched && zip!.invalid || isSubmitted && zip!.invalid">
+                    Please enter the zip/postal code
+                </mat-error>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary m-1" type="submit">Complete order</button>
+                <button class="btn btn-secondary m-1" routerLink="/cart">Back</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

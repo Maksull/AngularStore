@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NgForm } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Supplier } from "src/app/models/supplier";
 import { SupplierService } from "src/app/services/supplier.service";
@@ -12,16 +12,21 @@ export class SupplierEditorComponent {
     public supplier: Supplier = new Supplier();
     public isSubmitted: boolean = false;
 
-    public constructor(private supplierService: SupplierService, private router: Router, activeRoute: ActivatedRoute) {
+    public supplierEditorForm: FormGroup;
+
+    public constructor(private fb: FormBuilder, private supplierService: SupplierService, private router: Router, activeRoute: ActivatedRoute) {
         this.editing = activeRoute.snapshot.params["mode"] == "edit";
         if (this.editing) {
             Object.assign(this.supplier, supplierService.getSupplier(activeRoute.snapshot.params["id"]));
         }
+
+        this.supplierEditorForm = this.generateFormgroup();
     }
 
-    public save(form: NgForm) {
+    public save() {
         this.isSubmitted = true;
-        if (form.valid) {
+        if (this.supplierEditorForm.valid) {
+            this.supplier = this.supplierEditorForm.getRawValue();
             if (this.supplier.products == undefined) {
                 this.supplier.products = [];
             }
@@ -29,4 +34,29 @@ export class SupplierEditorComponent {
             this.router.navigateByUrl("/admin/main/suppliers");
         }
     }
+
+    private generateFormgroup() {
+        if (this.editing) {
+            return this.fb.group({
+                supplierId: [{ value: this.supplier.supplierId, disabled: true }],
+                name: [this.supplier.name, Validators.required],
+                city: [this.supplier.city, Validators.required]
+            });
+        } else {
+            return this.fb.group({
+                supplierId: [{ value: this.supplier.supplierId, disabled: true }],
+                name: ['', Validators.required],
+                city: ['', Validators.required]
+            });
+        }
+    }
+
+    //#region supplierEditorForm gets
+    public get name() {
+        return this.supplierEditorForm.get('name');
+    }
+    public get city() {
+        return this.supplierEditorForm.get('city');
+    }
+    //#endregion
 }

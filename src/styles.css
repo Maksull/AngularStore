@@ -132,9 +132,41 @@ table.orders table td:first-of-type {
     margin: 0;
     padding: 0;
 }
+
 .login {
     margin: auto;
     top: 15%;
     width: 35%;
+    padding: 1.5em;
+}
+
+.create-edit {
+    margin: auto;
+    margin-top: 5%;
+    width: 45%;
+    padding: 1.5em;
+}
+
+.admin-table {
+    margin: auto;
+    width: 100%;
+    padding: 1.5em;
+}
+
+.store {
+    margin: auto;
+    width: 80%;
+}
+
+.cart-details {
+    margin: auto;
+    top: 2%;
+    width: 80%;
+    padding: 1.5em;
+}
+.checkout {
+    margin: auto;
+    top: 10%;
+    width: 40%;
     padding: 1.5em;
 }

@@ -7,18 +7,18 @@
 <mat-card class="login">
     <mat-card-title class="text-center">Login</mat-card-title>
     <mat-card-content>
-        <form novalidate #form="ngForm" (ngSubmit)="authenticate(form)">
+        <form [formGroup]="authForm" (ngSubmit)="authenticate()">
             <mat-form-field>
                 <mat-label>Username</mat-label>
-                <input matInput class="form-control" type="text" name="username" [(ngModel)]="username" required />
+                <input matInput class="form-control" type="text" formControlName="username" />
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Password</mat-label>
-                <input matInput class="form-control" type="password" name="password" [(ngModel)]="password" required />
+                <input matInput class="form-control" type="password" formControlName="password" />
             </mat-form-field>
-            <div class="bg-danger mt-2 p-2 text-center text-white" *ngIf="errorMessage != null">
+            <mat-error class="bg-danger mt-2 p-2 text-center text-white" *ngIf="errorMessage != null">
                 {{errorMessage}}
-            </div>
+            </mat-error>
             <div class="text-center p-2">
                 <button class="btn btn-primary m-1" type="submit">Log In</button>
                 <button class="btn btn-secondary m-1" routerLink="/store">Go back</button>
