@@ -15,7 +15,8 @@
             Home
         </button>
         <button mat-button class="menu-button" *ngFor="let cat of categories"
-            [class.mat-accent]="cat.name == selectedCategory" (click)="changeCategory(cat.name)" (click)="sidenav.toggle()">
+            [class.mat-accent]="cat.name == selectedCategory" (click)="changeCategory(cat.name)"
+            (click)="sidenav.toggle()">
             {{cat.name}}
         </button>
         <mat-divider></mat-divider>
@@ -24,79 +25,84 @@
         </button>
     </mat-sidenav>
     <mat-sidenav-content>
-        <div class="container-fluid">
-            <div class="mt-2">
-                <div class="input-group mr-sm-2">
-                    <input type="text" class="form-control" [value]="selectedSearch" (keyup)="changeSearch($any($event).target.value)"
-                        placeholder="Search" />
-                    <div class="input-group-prepend">
-                        <div class="input-group">
-                            <button class="btn btn-secondary">Search</button>
+        <mat-card class="store">
+            <mat-card-content>
+                <div class="container-fluid">
+                    <div class="mt-2">
+                        <div class="input-group mr-sm-2">
+                            <input type="text" class="form-control" [value]="selectedSearch"
+                                (keyup)="changeSearch($any($event).target.value)" placeholder="Search" />
+                            <div class="input-group-prepend">
+                                <div class="input-group">
+                                    <button class="btn btn-secondary">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col p-2 text-dark">
+                            <div *ngFor="let product of products" class="card m-1 p-1 bg-light">
+                                <h4 class="mb-0">
+                                    {{product.name}}
+                                    <span class="badge rounded-pill bg-primary" style="float:right">
+                                        {{product.price | currency:"USD":"symbol":"2.2-2"}}
+                                    </span>
+                                </h4>
+                                <h6 class="mb-0">
+                                    <small>ID: {{product.productId}}</small>
+                                    {{product.category?.name}} | {{product.supplier?.name}}
+                                </h6>
+                                <div class="card-text bg-white p-1">
+                                    {{product.description}}
+                                    <button class="btn btn-success btn-sm float-end"
+                                        (click)="addProductToCart(product)">
+                                        Add to the Cart
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-inline float-start mr-1">
+                                <select class="form-control" [value]="productsPerPage"
+                                    (change)="changePageSize($any($event).target.value)">
+                                    <option value="3">3 per page</option>
+                                    <option value="6">6 per page</option>
+                                    <option value="9">9 per page</option>
+                                    <option value="12">12 per page</option>
+                                </select>
+                            </div>
+                            <div class="btn-group float-end">
+                                <button *counter="let page of pageCount" (click)="changePage(page)"
+                                    class="btn btn-outline-primary" [class.active]="page == selectedPage">
+                                    {{page}}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row text-dark">
+                            <div class="col form-group">
+                                <label>Sort by</label>
+                                <select class="form-control" [value]="selectedSort"
+                                    (change)="changeSort($any($event).target.value)">
+                                    <option selected disabled value='undefined'>Choose a property</option>
+                                    <option value='name'>Name</option>
+                                    <option value='price'>Price</option>
+                                </select>
+                            </div>
+                            <div class="col form-group">
+                                <label>Choose direction</label>
+                                <select class="form-control" [value]="isFromLower"
+                                    (change)="changeDirection($any($event).target.value)">
+                                    <option selected disabled value='undefined'>Choose direction</option>
+                                    <option value='true'>From lower to greater</option>
+                                    <option value='false'>From greater to lower</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <div style="width:1px;height:1.35em"></div>
+                                <button class="btn btn-primary form-control" (click)="reset()">Reset</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row text-white">
-                <div class="col p-2 text-dark">
-                    <div *ngFor="let product of products" class="card m-1 p-1 bg-light">
-                        <h4 class="mb-0">
-                            {{product.name}}
-                            <span class="badge rounded-pill bg-primary" style="float:right">
-                                {{product.price | currency:"USD":"symbol":"2.2-2"}}
-                            </span>
-                        </h4>
-                        <h6 class="mb-0">
-                            <small>ID: {{product.productId}}</small>
-                            {{product.category?.name}} | {{product.supplier?.name}}
-                        </h6>
-                        <div class="card-text bg-white p-1">
-                            {{product.description}}
-                            <button class="btn btn-success btn-sm float-end" (click)="addProductToCart(product)">
-                                Add to the Cart
-                            </button>
-                        </div>
-                    </div>
-                    <div class="form-inline float-start mr-1">
-                        <select class="form-control" [value]="productsPerPage"
-                            (change)="changePageSize($any($event).target.value)">
-                            <option value="3">3 per page</option>
-                            <option value="6">6 per page</option>
-                            <option value="9">9 per page</option>
-                            <option value="12">12 per page</option>
-                        </select>
-                    </div>
-                    <div class="btn-group float-end">
-                        <button *counter="let page of pageCount" (click)="changePage(page)"
-                            class="btn btn-outline-primary" [class.active]="page == selectedPage">
-                            {{page}}
-                        </button>
-                    </div>
-                </div>
-                <div class="row text-dark">
-                    <div class="col form-group">
-                        <label>Sort by</label>
-                        <select class="form-control" [value]="selectedSort"
-                            (change)="changeSort($any($event).target.value)">
-                            <option selected disabled value='undefined'>Choose a property</option>
-                            <option value='name'>Name</option>
-                            <option value='price'>Price</option>
-                        </select>
-                    </div>
-                    <div class="col form-group">
-                        <label>Choose direction</label>
-                        <select class="form-control" [value]="isFromLower"
-                            (change)="changeDirection($any($event).target.value)">
-                            <option selected disabled value='undefined'>Choose direction</option>
-                            <option value='true'>From lower to greater</option>
-                            <option value='false'>From greater to lower</option>
-                        </select>
-                    </div>
-                    <div class="col">
-                        <div style="width:1px;height:1.35em"></div>
-                        <button class="btn btn-primary form-control" (click)="reset()">Reset</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+            </mat-card-content>
+        </mat-card>
     </mat-sidenav-content>
 </mat-sidenav-container>

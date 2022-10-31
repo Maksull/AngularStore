@@ -1,6 +1,6 @@
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { CounterDirective } from "../directives/counter.directive";
@@ -14,7 +14,7 @@ import { StoreComponent } from "./store.component";
 
 @NgModule({
     declarations: [CounterDirective, StoreComponent, CartSummaryComponent, CartDetailsComponent, CheckoutComponent],
-    imports: [MaterialFeatures, HttpClientModule, BrowserModule, RouterModule, FormsModule],
+    imports: [MaterialFeatures, HttpClientModule, BrowserModule, RouterModule, FormsModule, ReactiveFormsModule],
     providers: [Cart, Order]
 })
 export class StoreModule{}

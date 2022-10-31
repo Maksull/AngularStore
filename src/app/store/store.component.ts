@@ -43,7 +43,7 @@ export class StoreComponent {
     }
 
     public get categories(): Category[] {
-        return this.categoryService.getCategories();
+        return this.categoryService.getCategories().filter(c => c.products!.length > 0);
     }
 
     public get pageCount(): number {
