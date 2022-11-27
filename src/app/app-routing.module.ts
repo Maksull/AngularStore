@@ -13,10 +13,15 @@ import { AuthGuard } from './guards/authGuard.guard';
 import { StoreFirstGuard } from './guards/storeFirst.guard';
 import { CartDetailsComponent } from './store/cart/cartDetails.component';
 import { CheckoutComponent } from './store/cart/checkout.component';
+import { MainComponent } from './store/main.component';
+import { ProductDetailsComponent } from './store/productDetails.component';
 import { StoreComponent } from './store/store.component';
 
 const routes: Routes = [
+  { path: "main", component: MainComponent},
   { path: "store", component: StoreComponent, canActivate: [StoreFirstGuard] },
+  { path: "store/:category", component: StoreComponent},
+  { path: "product/:id", component: ProductDetailsComponent },
   { path: "cart", component: CartDetailsComponent, canActivate: [StoreFirstGuard] },
   { path: "checkout", component: CheckoutComponent, canActivate: [StoreFirstGuard] },
   {
@@ -38,7 +43,7 @@ const routes: Routes = [
         ]
       },
       { path: "**", redirectTo: "main" }
-    ], canActivate: [StoreFirstGuard]
+    ]
   },
   { path: "**", redirectTo: "/store" }
 ];

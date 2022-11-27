@@ -48,7 +48,10 @@ export class CategoryEditorComponent {
         }
     }
 
+
+    //#region categoryEditorForm gets
     public get name() {
         return this.categoryEditorForm.get('name');
     }
+    //#endregion
 }

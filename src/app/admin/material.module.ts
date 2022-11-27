@@ -13,12 +13,10 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatSortModule } from "@angular/material/sort";
 import { MatCardModule } from "@angular/material/card";
-import { NgxMatFileInputModule } from "@angular-material-components/file-input";
-
 
 
 const features: any[] = [MatToolbarModule, MatIconModule, MatSidenavModule, MatButtonModule, MatDividerModule, MatTableModule, MatPaginatorModule,
-    MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatCheckboxModule, MatSortModule, MatCardModule, NgxMatFileInputModule];
+    MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatCheckboxModule, MatSortModule, MatCardModule];
 
 @NgModule({
     imports: [features],

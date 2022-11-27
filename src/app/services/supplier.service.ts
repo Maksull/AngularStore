@@ -1,8 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Product } from '../models/product';
 import { Supplier } from '../models/supplier';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class SupplierService {
   private url: string = "suppliers";
   private suppliers: Supplier[] = [];
 
-  public constructor(private http: HttpClient) {
+  public constructor(private http: HttpClient, private authService: AuthService) {
     this.http.get<Supplier[]>(`${environment.apiUrl}/${this.url}`).subscribe((result: Supplier[]) => (this.suppliers = result));
   }
 
@@ -25,17 +26,34 @@ export class SupplierService {
 
   public saveSupplier(supplier: Supplier) {
     if (supplier.supplierId == null || supplier.supplierId == 0) {
-      this.http.post<Supplier>(`${environment.apiUrl}/${this.url}`, supplier, this.getOptions()).subscribe(s => this.suppliers.push(s));
+      this.http.post<Supplier>(`${environment.apiUrl}/${this.url}`, supplier, this.getOptions()).subscribe({
+        next: (s: Supplier) => {
+          this.suppliers.push(s);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.authService.logout();
+        }
+      });
     } else {
-      this.http.put<Supplier>(`${environment.apiUrl}/${this.url}`, supplier, this.getOptions()).subscribe(s => {
-        this.suppliers.splice(this.suppliers.findIndex(s => s.supplierId == supplier.supplierId), 1, supplier)
+      this.http.put<Supplier>(`${environment.apiUrl}/${this.url}`, supplier, this.getOptions()).subscribe({
+        next: (s: Supplier) => {
+          this.suppliers.splice(this.suppliers.findIndex(s => s.supplierId == supplier.supplierId), 1, supplier);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.authService.logout();
+        }
       })
     }
   }
 
   public deleteSupplier(id: number) {
-    this.http.delete<Supplier>(`${environment.apiUrl}/${this.url}/${id}`, this.getOptions()).subscribe(s => {
-      this.suppliers.splice(this.suppliers.findIndex(s => s.supplierId == id), 1)
+    this.http.delete<Supplier>(`${environment.apiUrl}/${this.url}/${id}`, this.getOptions()).subscribe({
+      next: (s: Supplier) => {
+        this.suppliers.splice(this.suppliers.findIndex(s => s.supplierId == id), 1);
+      },
+      error: (err: HttpErrorResponse) => {
+        this.authService.logout();
+      }
     })
   }
 

@@ -1,77 +1,76 @@
-<mat-toolbar color="primary">
-    <span></span>
-    AngularStore
-    <span></span>
-</mat-toolbar>
+<header></header>
 
-<div *ngIf="isOrderSent" class="m-2 text-center">
-    <h2>Thanks!</h2>
-    <p>Thanks for placing your order.</p>
-    <p>We'll ship your goods as soon as possible.</p>
-    <button class="btn btn-primary" routerLink="/store">Return to Store</button>
+<div class="checkout-page">
+    <div class="container">
+        <div class="my-row">
+            <div class="my-col-2">
+                <img src="assets/images/checkout.png" width="100%">
+            </div>
+            <div class="my-col-2">
+                <div *ngIf="isOrderSent" class="m-2 text-center">
+                    <h2>Thanks!</h2>
+                    <p>Thanks for placing your order.</p>
+                    <p>We'll ship your goods as soon as possible.</p>
+                    <button class="btn btn-primary" routerLink="/store">Return to Store</button>
+                </div>
+                <mat-card *ngIf="!isOrderSent" class="checkout">
+                    <mat-card-title class="text-center">Checkout</mat-card-title>
+                    <mat-card-content>
+                        <form [formGroup]="checkoutForm" (ngSubmit)="submitOrder()" class="m-2">
+                            <mat-form-field>
+                                <mat-label>Name</mat-label>
+                                <input matInput class="form-control" formControlName="name" placeholder="Enter your name"/>
+                                <mat-error *ngIf="name!.touched && name!.invalid || isSubmitted && name!.invalid">
+                                    Please enter the name
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Email</mat-label>
+                                <input matInput class="form-control" type="email" email formControlName="email" placeholder="Enter your email"/>
+                                <mat-error *ngIf="email!.touched && email!.invalid || isSubmitted && email!.invalid">
+                                    Please enter valid email
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Address</mat-label>
+                                <input matInput class="form-control" formControlName="address" placeholder="Enter your address"/>
+                                <mat-error
+                                    *ngIf="address!.touched && address!.invalid || isSubmitted && address!.invalid">
+                                    Please enter your address
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>City</mat-label>
+                                <input matInput class="form-control" formControlName="city" placeholder="Enter your city"/>
+                                <mat-error *ngIf="city!.touched && city!.invalid || isSubmitted && city!.invalid">
+                                    Please enter the city
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Country</mat-label>
+                                <input matInput class="form-control" formControlName="country" placeholder="Enter your country"/>
+                                <mat-error
+                                    *ngIf="country!.touched && country!.invalid || isSubmitted && country!.invalid">
+                                    Please enter the country
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Zip/Postal Code</mat-label>
+                                <input matInput class="form-control" formControlName="zip" placeholder="Enter your zip/postal code"/>
+                                <mat-error *ngIf="zip!.touched && zip!.invalid || isSubmitted && zip!.invalid">
+                                    Please enter the zip/postal code
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="d-flex justify-content-center text-center mt-2">
+                                <button class="btn btn-primary m-1" type="submit">Complete order</button>
+                                <button class="btn btn-secondary m-1" routerLink="/cart">Back</button>
+                            </div>
+                        </form>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
 </div>
-<mat-card *ngIf="!isOrderSent" class="checkout">
-    <mat-card-title class="text-center">Checkout</mat-card-title>
-    <mat-card-content>
-        <form [formGroup]="checkoutForm" (ngSubmit)="submitOrder()" class="m-2">
-            <div class="form-group">
-                <mat-form-field>
-                    <mat-label>Name</mat-label>
-                    <input matInput class="form-control" formControlName="name" />
-                </mat-form-field>
-                <mat-error *ngIf="name!.touched && name!.invalid || isSubmitted && name!.invalid">
-                    Please enter the name
-                </mat-error>
-            </div>
-            <div class="form-group">
-                <mat-form-field>
-                    <mat-label>Email</mat-label>
-                    <input matInput class="form-control" type="email" email formControlName="email" />
-                </mat-form-field>
-                <mat-error *ngIf="email!.touched && email!.invalid || isSubmitted && email!.invalid">
-                    Please enter valid email
-                </mat-error>
-            </div>
-            <div class="form-group">
-                <mat-form-field>
-                    <mat-label>Address</mat-label>
-                    <input matInput class="form-control" formControlName="address" />
-                </mat-form-field>
-                <mat-error *ngIf="address!.touched && address!.invalid || isSubmitted && address!.invalid">
-                    Please enter your address
-                </mat-error>
-            </div>
-            <div class="form-group">
-                <mat-form-field>
-                    <mat-label>City</mat-label>
-                    <input matInput class="form-control" formControlName="city" />
-                </mat-form-field>
-                <mat-error *ngIf="city!.touched && city!.invalid || isSubmitted && city!.invalid">
-                    Please enter the city
-                </mat-error>
-            </div>
-            <div class="form-group">
-                <mat-form-field>
-                    <mat-label>Country</mat-label>
-                    <input matInput class="form-control" formControlName="country" />
-                </mat-form-field>
-                <mat-error *ngIf="country!.touched && country!.invalid || isSubmitted && country!.invalid">
-                    Please enter the country
-                </mat-error>
-            </div>
-            <div class="form-group">
-                <mat-form-field>
-                    <mat-label>Zip/Postal Code</mat-label>
-                    <input matInput class="form-control" formControlName="zip" />
-                </mat-form-field>
-                <mat-error *ngIf="zip!.touched && zip!.invalid || isSubmitted && zip!.invalid">
-                    Please enter the zip/postal code
-                </mat-error>
-            </div>
-            <div class="text-center">
-                <button class="btn btn-primary m-1" type="submit">Complete order</button>
-                <button class="btn btn-secondary m-1" routerLink="/cart">Back</button>
-            </div>
-        </form>
-    </mat-card-content>
-</mat-card>
+
+<footer></footer>

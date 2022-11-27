@@ -10,4 +10,6 @@ export class Product{
     public category?: Category;
     public supplierId?: number;
     public supplier?: Supplier; 
+    public img?: File;
+    public images?: string;
 }

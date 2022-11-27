@@ -7,7 +7,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
 import { MatCardModule } from "@angular/material/card";
 
-const features: any[] = [MatToolbarModule, MatSidenavModule, MatIconModule, MatButtonModule, MatDividerModule, MatInputModule, MatCardModule]
+const features: any[] = [MatToolbarModule, MatSidenavModule, MatIconModule, MatButtonModule, MatDividerModule, MatInputModule, MatCardModule, MatInputModule]
 
 @NgModule({
     imports: [features],

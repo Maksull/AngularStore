@@ -1,9 +1,8 @@
 <mat-card class="admin-table">
-    <mat-card-title class="text-center mt-2 mb-1">Categories</mat-card-title>
+    <mat-card-title class="text-center mt-2 mb-2">Categories</mat-card-title>
     <mat-card-content>
-        <mat-form-field>
-            <input matInput type="text" class="form-control" placeholder="Search"
-                (keyup)="changeSearch($any($event).target.value)" />
+        <mat-form-field appearance="outline">
+            <input matInput type="text" placeholder="Search" (keyup)="changeSearch($any($event).target.value)" />
         </mat-form-field>
         <table mat-table matSort [dataSource]="tableDataSource">
             <ng-container matColumnDef="categoryId">

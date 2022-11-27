@@ -1,0 +1,18 @@
+<div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a routerLink="/products"><img src="assets/images/angularstore-logo-black.png" width="125px"></a>
+            </div>
+            <nav>
+                <ul id="MenuItems" class="m-0">
+                    <li><a routerLink="/main">Home</a></li>
+                    <li><a routerLink="/products">Products</a></li>
+                    <li><a routerLink="/admin">Admin</a></li>
+                </ul>
+            </nav>
+            <cart-summary></cart-summary>
+            <img src="assets/images/menu.png" class="menu-icon" (click)="toggleMenu()">
+        </div>
+    </div>
+</div>

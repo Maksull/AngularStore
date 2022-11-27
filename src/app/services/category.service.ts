@@ -1,8 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Category } from '../models/category';
 import { Product } from '../models/product';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class CategoryService {
   private url: string = "categories";
   private categories: Category[] = [];
 
-  public constructor(private http: HttpClient) {
+  public constructor(private http: HttpClient, private authService: AuthService) {
     this.http.get<Category[]>(`${environment.apiUrl}/${this.url}`).subscribe((result: Category[]) => (this.categories = result));
   }
 
@@ -25,17 +26,34 @@ export class CategoryService {
 
   public saveCategory(category: Category) {
     if (category.categoryId == null || category.categoryId == 0) {
-      this.http.post<Category>(`${environment.apiUrl}/${this.url}`, category, this.getOptions()).subscribe(c => this.categories.push(c));
+      this.http.post<Category>(`${environment.apiUrl}/${this.url}`, category, this.getOptions()).subscribe({
+        next: (c: Category) => {
+          this.categories.push(c)
+        },
+        error: (err: HttpErrorResponse) => {
+          this.authService.logout();
+        }
+      });
     } else {
-      this.http.put<Category>(`${environment.apiUrl}/${this.url}`, category, this.getOptions()).subscribe(c => {
-        this.categories.splice(this.categories.findIndex(c => c.categoryId == category.categoryId), 1, category)
+      this.http.put<Category>(`${environment.apiUrl}/${this.url}`, category, this.getOptions()).subscribe({
+        next: (c: Category) => {
+          this.categories.splice(this.categories.findIndex(c => c.categoryId == category.categoryId), 1, category);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.authService.logout();
+        }
       })
     }
   }
 
   public deleteCategory(id: number) {
-    this.http.delete<Category>(`${environment.apiUrl}/${this.url}/${id}`, this.getOptions()).subscribe(c => {
-      this.categories.splice(this.categories.findIndex(c => c.categoryId == id), 1)
+    this.http.delete<Category>(`${environment.apiUrl}/${this.url}/${id}`, this.getOptions()).subscribe({
+      next: (c: Category) => {
+        this.categories.splice(this.categories.findIndex(c => c.categoryId == id), 1);
+      },
+      error: (err: HttpErrorResponse) => {
+        this.authService.logout();
+      }
     });
   }
 
