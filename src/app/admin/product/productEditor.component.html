@@ -1,0 +1,83 @@
+<mat-card class="create-edit">
+    <mat-card-title class="text-center">{{editing ? "Edit" : "Create"}} a Product</mat-card-title>
+    <mat-card-content>
+        <form *ngIf="productEditorForm" [formGroup]="productEditorForm" (ngSubmit)="save()">
+            <div class="form-group">
+                <mat-form-field *ngIf="editing">
+                    <mat-label>ID</mat-label>
+                    <input matInput formControlName="productId" />
+                </mat-form-field>
+            </div>
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" placeholder="Enter the name" />
+                <mat-error *ngIf="name!.touched && name!.invalid || isSubmitted && name!.invalid">
+                    Please enter the name
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Category</mat-label>
+                <mat-select formControlName="categoryId">
+                    <mat-option *ngFor="let cat of categories" name="category" [value]="cat.categoryId">{{cat.name}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="categoryId!.touched && categoryId!.invalid || isSubmitted && categoryId!.invalid">
+                    Please enter the category
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Supplier</mat-label>
+                <mat-select formControlName="supplierId">
+                    <mat-option *ngFor="let sup of suppliers" name="supplier" [value]="sup.supplierId">{{sup.name}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="supplierId!.touched && supplierId!.invalid || isSubmitted && supplierId!.invalid">
+                    Please enter the supplier
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Description</mat-label>
+                <input matInput formControlName="description" placeholder="Enter the description" />
+                <mat-error *ngIf="description!.touched && description!.invalid || isSubmitted && description!.invalid">
+                    Please enter the description
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Price</mat-label>
+                <input matInput type="number" min="0" placeholder="0" formControlName="price"
+                    placeholder="Enter the price" />
+                <span matPrefix>
+                    <mat-icon>$&nbsp;</mat-icon>
+                </span>
+                <mat-error *ngIf="price!.touched && price!.invalid || isSubmitted && price!.invalid">
+                    Please enter the price
+                </mat-error>
+            </mat-form-field>
+
+            <div *ngIf="!editing" class="form-group mt-2">
+                <input class="form-control pl-1" id="FileInput" type="file" (change)="inputImage($event)" formControlName="img"
+                    accept=".png">
+                <mat-hint>Choose one image for the product</mat-hint>
+                <mat-error *ngIf="img!.touched && img!.invalid || isSubmitted && img!.invalid">
+                    Please choose an image
+                </mat-error>
+            </div>
+
+            <div *ngIf="editing" class="form-group mt-2">
+                <input class="form-control pl-1" id="FileInput" type="file" (change)="inputImage($event)" formControlName="img"
+                    accept=".png">
+                <mat-hint>Edit the image for the product</mat-hint>
+                <br>
+                <mat-hint><a target=”_blank” [href]="productImage(product.images!)">Current image</a></mat-hint>
+            </div>
+
+
+            <button type="submit" mat-flat-button color="primary">
+                {{editing ? "Save" : "Create"}}
+            </button>
+            <button type="reset" mat-stroked-button routerLink="/admin/main/products">
+                Cancel
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

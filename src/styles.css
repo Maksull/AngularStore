@@ -1,1 +1,683 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/* ----- admin ----- */
+
+mat-toolbar span {
+    flex: 1 1 auto;
+}
+
+.menu-button {
+    width: 100%;
+    font-size: 1rem;
+}
+
+.menu-button .mat-icon {
+    margin-right: 10px;
+}
+
+.menu-button span {
+    flex: 1 1 auto;
+}
+
+mat-sidenav {
+    margin: 16px;
+    width: 175px;
+    border-right: none;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+mat-sidenav .mat-divider {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+mat-sidenav-container {
+    height: calc(100vh - 60px);
+}
+
+mat-sidenav .mat-button-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: baseline;
+    align-content: center;
+}
+
+mat-sidenav .mat-button-wrapper mat-icon {
+    margin-top: 5px;
+}
+
+mat-sidenav .mat-button-wrapper span {
+    text-align: start;
+}
+
+table[mat-table] {
+    width: 100%;
+    table-layout: auto;
+}
+
+table[mat-table] button {
+    margin-left: 5px;
+}
+
+table[mat-table] th.mat-header-cell {
+    font-size: large;
+    font-weight: bold;
+}
+
+table[mat-table] .mat-column-name {
+    width: 25%;
+}
+
+table[mat-table] .mat-column-buttons {
+    width: 30%;
+}
+
+.bottom-box {
+    padding-bottom: 20px;
+}
+
+.bottom-box>button[mat-flat-button] {
+    margin-top: 10px;
+}
+
+.bottom-box mat-paginator {
+    float: right;
+    font-size: 14px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-form-field:first-child {
+    margin-top: 20px;
+}
+
+form button[mat-flat-button] {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+h3.heading {
+    margin-top: 20px;
+}
+
+mat-checkbox {
+    margin: 10px;
+    font-size: large;
+}
+
+td.no-data {
+    font-size: large;
+}
+
+table.orders tbody,
+table.orders thead {
+    vertical-align: top
+}
+
+table.orders td {
+    padding-top: 10px;
+}
+
+table.orders table th:first-of-type,
+table.orders table td:first-of-type {
+    margin: 0;
+    padding: 0;
+}
+
+.login {
+    margin: auto;
+    top: 15%;
+    width: 35%;
+    padding: 1.5em;
+}
+
+.create-edit {
+    margin: auto;
+    margin-top: 5%;
+    width: 45%;
+    padding: 1.5em;
+}
+
+.admin-table {
+    margin: auto;
+    width: 100%;
+    padding: 1.5em;
+}
+
+
+/* ----- header ----- */
+
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+nav {
+    flex: 1;
+    text-align: right;
+}
+nav ul {
+    display: inline-block;
+}
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #555;
+}
+
+p {
+    color: #555;
+}
+
+.container {
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.my-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.my-col-2 {
+    flex-basis: 50%;
+    min-width: 300px;
+}
+.my-col-2 img {
+    max-width: 200%;
+    padding: 50px 0;
+}
+.my-col-2 h1 {
+    font-size: 50px;
+    line-height: 60px;
+    margin: 25px 0;
+}
+
+.btn {
+    display: inline-block;
+    background: #ff523b;
+    color: #fff;    
+    padding: 8px 30px;
+    margin: 30px 0;
+    border-radius: 30px;
+    transition: background 0.5s;
+}
+.btn:hover {
+    background: #563434;
+}
+
+.header {
+    background: radial-gradient(#fff, #ffd6d6);
+}
+.header .row {
+    margin-top: 70px;
+}
+.header a {
+    text-decoration: none;
+    color: black;
+}
+.header a:hover {
+    color: black;
+}
+
+.categories {
+    margin: 70px 0;
+}
+
+.col-3 {
+    flex-basis: 30%;
+    min-width: 250px;
+    margin-bottom: 30px;
+}
+.col-3 img {
+    width: 100%;
+}
+
+.small-container {
+    max-width: 1080px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    min-height: 65vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.small-container-2 {
+    max-width: 1080px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.col-4 {
+    flex-basis: 25%;
+    padding: 10px;
+    min-width: 200px;
+    margin-bottom: 50px;
+    transition: transform 0.5s;
+}
+.col-4 img {
+    width: 100%;
+}
+
+.title {
+    text-align: center;
+    margin: 0 auto 80px;
+    position: relative;
+    line-height: 60px;
+    color: #555;
+}
+
+.title::after {
+    content: '';
+    background: #ff523b;
+    width: 80px;
+    height: 5px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+h4 {
+    color: #555;
+    font-weight: normal;
+}
+
+.col-4 p {
+    font-size: 14px;
+}
+
+.col-4:hover {
+    transform: translateY(-20px);
+}
+
+.offer {
+    background: radial-gradient(#fff, #ffd6d6);
+    margin-top: 80px;
+    padding: 30px 0;
+}
+
+.my-col-2 .offer-img {
+    padding: 50px;
+}
+
+small {
+    color: #555;
+}
+
+
+.brands {
+    margin: 100px auto;
+}
+.my-col-5 {
+    width: 160px;
+}
+.my-col-5 img {
+    width: 100%;
+    filter: grayscale(100%);
+}
+.my-col-5 img:hover {
+    filter: grayscale(0);
+}
+
+.footer {
+    background: black;
+    color: #8a8a8a;
+    font-size: 14px;
+    padding: 60px 0 20px;
+    margin-top: auto;
+}
+
+.footer p {
+    color: #8a8a8a;
+}
+.footer h3 {
+    color: #8a8a8a;
+    margin-bottom: 20px;
+}
+.footer a {
+    text-decoration: none;
+    color: white;
+}
+.footer a:hover {
+    color: white;
+}
+
+.footer-col-1, .footer-col-2, .footer-col-3, .footer-col-4 {
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.footer-col-1 {
+    flex-basis: 30%;
+}
+.footer-col-2 {
+    flex-basis: 1;
+    text-align: center;
+}
+.footer-col-2 img {
+    width: 180px;
+    margin-bottom: 20px;
+}
+
+.footer-col-3, .footer-col-4 {
+    flex-basis: 12%;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.app-logo {
+    margin-top: 20px;
+}
+.app-logo img {
+    width: 140px;
+}
+
+.menu-icon {
+    width: 28px;
+    margin-left: 20px;
+    display: none;
+}
+
+@media only screen and (max-width: 800px) {
+    .brands {
+        display: none;
+    }
+    .my-col-2 img {
+        max-width: 100%;
+    }
+    .checkout {
+        width: 100%;
+    }
+
+    .menu-icon {
+        display: block;
+        cursor: pointer;
+    }
+    nav ul {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        background: #333;
+        width: 100%;
+        max-height: 0px;
+        overflow: hidden;
+        transition: max-height 0.5s;
+    }
+    nav ul li {
+        display: block;
+        margin-right: 50px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .header a{
+        color: #fff;
+    }
+
+    .login {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .navbar cart-summary small{
+        display:none;
+    }
+    .my-row {
+        text-align: center;
+    }
+    .my-col-2, .col-3, .col-4 {
+        flex-basis: 100%;
+    }
+    .single-product .row {
+        text-align: left;
+    }
+    .single-product .my-col-2 {
+        padding: 20px 0;
+    }
+    .single-product h1 {
+        font-size: 26px;
+        line-height: 32px;
+    }
+}
+
+
+/* ------ products ------  */
+
+.row-2 {
+    justify-content: space-between;
+    margin: 100px auto 50px;
+}
+
+select {
+    border: 1px solid #ff523b;
+    padding: 5px;
+}
+select:focus {
+    outline: none;
+}
+
+.page-btn {
+    margin: 0 auto 80px;
+}
+.page-btn span {
+    display: inline-block;
+    border: 1px solid #ff523b;
+    margin-left:  10px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+}
+.page-btn span:hover {
+    background: #ff523b;
+    color: #fff;
+}
+.selected-page {
+    background: #ff523b;
+    color: #fff;
+}
+
+
+/* ------- productDetails ------- */
+
+
+.single-product {
+    margin-top: 80px;
+}
+.single-product .my-col-2 {
+    padding: 20px;
+}
+.single-product .my-col-2 img {
+    padding: 0;
+}
+.single-product h4 {
+    margin: 20px 0;
+    font-size: 22px;
+    font-weight: bold;
+}
+.single-product input {
+    width: 50px;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 20px;
+    margin-right: 10px;
+    border: 1px solid #ff523b;
+}
+input:focus {
+    outline: none;
+}
+.single-product .fa {
+    color: #ff523b;
+}
+
+.single-product a {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+
+/* ------- cart ------- */
+
+.cart-page {
+    margin-top: 80px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.cart-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cart-details {
+    margin: auto;
+    top: 2%;
+    width: 80%;
+    padding: 1.5em;
+}
+
+.cart-details th {
+    text-align: left;
+    padding: 5px;
+    color: white;
+    background: #ff523b;
+    font-weight: normal;
+}
+th:last-child {
+    text-align: right;
+}
+
+
+td {
+    padding: 10px 5px;
+}
+td input {
+    width: 40px;
+    height: 30px;
+    padding: 5px;
+}
+td a {
+    color: #ff523b;
+    font-size: 12px;
+}
+td img {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+}
+td:last-child {
+    text-align: right;
+}
+
+.total-price {
+    display: flex;
+    justify-content: flex-end;
+}
+.total-price table {
+    border-top: 3px solid #ff523b;
+    width: 100%;
+    max-width: 450px;
+}
+
+/* ------- checkout ------- */
+
+.checkout {
+    margin: auto;
+    top: 10%;
+    width: 70%;
+    padding: 1.5em;
+}
+
+.checkout mat-form-field {
+    margin-top: 1em;
+}
+
+.checkout-page {
+    padding: 50px 0;
+    background: radial-gradient(#fff, #ffd6d6);
+}
+
+.form-container {
+    background: white;
+    width: 400px;
+    height: 700px;
+    position: relative;
+    text-align: center;
+    padding: 20px 0;
+    margin: auto;
+    box-shadow: 0 0 20px 0px rgba(0,0,0,0.1);
+}
+
+.form-container span {
+    font-weight: bold;
+    padding: 0 10px;
+    color: #555;
+    cursor: pointer;
+    width: 100px;
+    display: inline-block;
+}
+.form-btn {
+    display: inline-block;
+}
+.form-container form {
+    padding: 0 20px;
+    position: absolute;
+    top: 50px;
+}
+
+form .btn {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    margin: 10px 0;
+}
+form .btn:focus {
+    outline: none;
+}
+form a {
+    font-size: 12px;
+}
+
+#Indicator {
+    width: 100px;
+    border: none;
+    background: #ff523b;
+    height: 3px;
+    margin-top: 8px;
+}

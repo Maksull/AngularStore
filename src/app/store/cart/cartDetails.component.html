@@ -1,0 +1,48 @@
+<header></header>
+
+<div class="small-container cart-details">
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+        <tr *ngFor="let line of cart.lines">
+            <td>
+                <div class="cart-info">
+                    <img [src]='productImage(line.product.images)'>
+                    <div>
+                        <p>{{line.product.name}}</p>
+                        <small>Price: {{line.product.price | currency:"USD":"symbol":"2.2-2"}}</small>
+                        <br>
+                        <a (click)="cart.removeLine(line.product.productId!)" class="text-danger" role="button">Remove</a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <input style="width:5em" type="number" min="1" [value]="line.quantity"
+                    (change)="cart.updateQuantity(line.product, $any($event).target.value)" />
+            </td>
+            <td>{{line.lineCost | currency:"USD":"symbol":"2.2-2"}}</td>
+        </tr>
+    </table>
+
+    <div class="total-price">
+        <table>
+            <tr>
+                <td>Total: </td>
+                <td>{{cart.cartPrice | currency:"USD":"symbol":"2.2-2"}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="my-row">
+        <button class="btn btn-primary m-1" routerLink="/store">
+            Continue shopping
+        </button>
+        <button class="btn btn-secondary m-1" routerLink="/checkout" [disabled]="cart.lines.length== 0">
+            Checkout
+        </button>
+    </div>
+</div>
+
+<footer></footer>
