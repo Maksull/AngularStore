@@ -19,21 +19,21 @@
                         <form [formGroup]="checkoutForm" (ngSubmit)="submitOrder()" class="m-2">
                             <mat-form-field>
                                 <mat-label>Name</mat-label>
-                                <input matInput class="form-control" formControlName="name" placeholder="Enter your name"/>
+                                <input matInput formControlName="name" placeholder="Enter your name"/>
                                 <mat-error *ngIf="name!.touched && name!.invalid || isSubmitted && name!.invalid">
                                     Please enter the name
                                 </mat-error>
                             </mat-form-field>
                             <mat-form-field>
                                 <mat-label>Email</mat-label>
-                                <input matInput class="form-control" type="email" email formControlName="email" placeholder="Enter your email"/>
+                                <input matInput type="email" email formControlName="email" placeholder="Enter your email"/>
                                 <mat-error *ngIf="email!.touched && email!.invalid || isSubmitted && email!.invalid">
                                     Please enter valid email
                                 </mat-error>
                             </mat-form-field>
                             <mat-form-field>
                                 <mat-label>Address</mat-label>
-                                <input matInput class="form-control" formControlName="address" placeholder="Enter your address"/>
+                                <input matInput formControlName="address" placeholder="Enter your address"/>
                                 <mat-error
                                     *ngIf="address!.touched && address!.invalid || isSubmitted && address!.invalid">
                                     Please enter your address
@@ -41,14 +41,14 @@
                             </mat-form-field>
                             <mat-form-field>
                                 <mat-label>City</mat-label>
-                                <input matInput class="form-control" formControlName="city" placeholder="Enter your city"/>
+                                <input matInput formControlName="city" placeholder="Enter your city"/>
                                 <mat-error *ngIf="city!.touched && city!.invalid || isSubmitted && city!.invalid">
                                     Please enter the city
                                 </mat-error>
                             </mat-form-field>
                             <mat-form-field>
                                 <mat-label>Country</mat-label>
-                                <input matInput class="form-control" formControlName="country" placeholder="Enter your country"/>
+                                <input matInput formControlName="country" placeholder="Enter your country"/>
                                 <mat-error
                                     *ngIf="country!.touched && country!.invalid || isSubmitted && country!.invalid">
                                     Please enter the country
@@ -56,7 +56,7 @@
                             </mat-form-field>
                             <mat-form-field>
                                 <mat-label>Zip/Postal Code</mat-label>
-                                <input matInput class="form-control" formControlName="zip" placeholder="Enter your zip/postal code"/>
+                                <input matInput formControlName="zip" placeholder="Enter your zip/postal code"/>
                                 <mat-error *ngIf="zip!.touched && zip!.invalid || isSubmitted && zip!.invalid">
                                     Please enter the zip/postal code
                                 </mat-error>
