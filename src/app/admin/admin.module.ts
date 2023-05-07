@@ -2,9 +2,9 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
-import { AuthGuard } from "../guards/authGuard.guard";
+import { CookieService } from "ngx-cookie-service";
+import { AdminGuard } from "../guards/adminGuard.guard";
 import { AdminComponent } from "./admin.component";
-import { AuthComponent } from "./auth.component";
 import { CategoryEditorComponent } from "./category/categoryEditor.component";
 import { CategoryTableComponent } from "./category/categoryTable.component";
 import { MaterialFeatures } from "./material.module";
@@ -16,11 +16,11 @@ import { SupplierTableComponent } from "./supplier/supplierTable.component";
 
 @NgModule({
     imports: [MaterialFeatures, RouterModule, FormsModule, BrowserModule, ReactiveFormsModule],
-    declarations: [AdminComponent, AuthComponent,
+    declarations: [AdminComponent,
         ProductTableComponent, ProductEditorComponent,
         CategoryTableComponent, CategoryEditorComponent,
         SupplierTableComponent, SupplierEditorComponent,
         OrderTableComponent],
-    providers: [AuthGuard]
+    providers: [AdminGuard, CookieService]
 })
 export class AdminModule { }

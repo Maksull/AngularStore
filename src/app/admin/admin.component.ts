@@ -10,5 +10,6 @@ export class AdminComponent {
 
     public logout() {
         this.authService.logout();
+        this.router.navigateByUrl("/store");
     }
 }
