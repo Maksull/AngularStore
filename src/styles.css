@@ -174,9 +174,11 @@ nav {
     flex: 1;
     text-align: right;
 }
+
 nav ul {
     display: inline-block;
 }
+
 nav ul li {
     display: inline-block;
     margin-right: 20px;
@@ -198,20 +200,27 @@ p {
     padding-right: 25px;
 }
 
+.account-container {
+    margin-bottom: 200px;
+}
+
 .my-row {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-around;
 }
+
 .my-col-2 {
     flex-basis: 50%;
     min-width: 300px;
 }
+
 .my-col-2 img {
     max-width: 200%;
     padding: 50px 0;
 }
+
 .my-col-2 h1 {
     font-size: 50px;
     line-height: 60px;
@@ -221,12 +230,13 @@ p {
 .btn {
     display: inline-block;
     background: #ff523b;
-    color: #fff;    
+    color: #fff;
     padding: 8px 30px;
     margin: 30px 0;
     border-radius: 30px;
     transition: background 0.5s;
 }
+
 .btn:hover {
     background: #563434;
 }
@@ -234,13 +244,16 @@ p {
 .header {
     background: radial-gradient(#fff, #ffd6d6);
 }
+
 .header .row {
     margin-top: 70px;
 }
+
 .header a {
     text-decoration: none;
     color: black;
 }
+
 .header a:hover {
     color: black;
 }
@@ -254,6 +267,7 @@ p {
     min-width: 250px;
     margin-bottom: 30px;
 }
+
 .col-3 img {
     width: 100%;
 }
@@ -284,6 +298,7 @@ p {
     margin-bottom: 50px;
     transition: transform 0.5s;
 }
+
 .col-4 img {
     width: 100%;
 }
@@ -339,13 +354,16 @@ small {
 .brands {
     margin: 100px auto;
 }
+
 .my-col-5 {
     width: 160px;
 }
+
 .my-col-5 img {
     width: 100%;
     filter: grayscale(100%);
 }
+
 .my-col-5 img:hover {
     filter: grayscale(0);
 }
@@ -361,19 +379,25 @@ small {
 .footer p {
     color: #8a8a8a;
 }
+
 .footer h3 {
     color: #8a8a8a;
     margin-bottom: 20px;
 }
+
 .footer a {
     text-decoration: none;
     color: white;
 }
+
 .footer a:hover {
     color: white;
 }
 
-.footer-col-1, .footer-col-2, .footer-col-3, .footer-col-4 {
+.footer-col-1,
+.footer-col-2,
+.footer-col-3,
+.footer-col-4 {
     min-width: 250px;
     margin-bottom: 20px;
 }
@@ -381,16 +405,19 @@ small {
 .footer-col-1 {
     flex-basis: 30%;
 }
+
 .footer-col-2 {
     flex-basis: 1;
     text-align: center;
 }
+
 .footer-col-2 img {
     width: 180px;
     margin-bottom: 20px;
 }
 
-.footer-col-3, .footer-col-4 {
+.footer-col-3,
+.footer-col-4 {
     flex-basis: 12%;
     text-align: center;
 }
@@ -402,6 +429,7 @@ ul {
 .app-logo {
     margin-top: 20px;
 }
+
 .app-logo img {
     width: 140px;
 }
@@ -416,9 +444,11 @@ ul {
     .brands {
         display: none;
     }
+
     .my-col-2 img {
         max-width: 100%;
     }
+
     .checkout {
         width: 100%;
     }
@@ -427,6 +457,7 @@ ul {
         display: block;
         cursor: pointer;
     }
+
     nav ul {
         position: absolute;
         top: 70px;
@@ -437,13 +468,15 @@ ul {
         overflow: hidden;
         transition: max-height 0.5s;
     }
+
     nav ul li {
         display: block;
         margin-right: 50px;
         margin-top: 10px;
         margin-bottom: 10px;
     }
-    .header a{
+
+    .header a {
         color: #fff;
     }
 
@@ -453,21 +486,28 @@ ul {
 }
 
 @media only screen and (max-width: 600px) {
-    .navbar cart-summary small{
-        display:none;
+    .navbar cart-summary small {
+        display: none;
     }
+
     .my-row {
         text-align: center;
     }
-    .my-col-2, .col-3, .col-4 {
+
+    .my-col-2,
+    .col-3,
+    .col-4 {
         flex-basis: 100%;
     }
+
     .single-product .row {
         text-align: left;
     }
+
     .single-product .my-col-2 {
         padding: 20px 0;
     }
+
     .single-product h1 {
         font-size: 26px;
         line-height: 32px;
@@ -486,6 +526,7 @@ select {
     border: 1px solid #ff523b;
     padding: 5px;
 }
+
 select:focus {
     outline: none;
 }
@@ -493,20 +534,23 @@ select:focus {
 .page-btn {
     margin: 0 auto 80px;
 }
+
 .page-btn span {
     display: inline-block;
     border: 1px solid #ff523b;
-    margin-left:  10px;
+    margin-left: 10px;
     width: 40px;
     height: 40px;
     text-align: center;
     line-height: 40px;
     cursor: pointer;
 }
+
 .page-btn span:hover {
     background: #ff523b;
     color: #fff;
 }
+
 .selected-page {
     background: #ff523b;
     color: #fff;
@@ -519,17 +563,21 @@ select:focus {
 .single-product {
     margin-top: 80px;
 }
+
 .single-product .my-col-2 {
     padding: 20px;
 }
+
 .single-product .my-col-2 img {
     padding: 0;
 }
+
 .single-product h4 {
     margin: 20px 0;
     font-size: 22px;
     font-weight: bold;
 }
+
 .single-product input {
     width: 50px;
     height: 40px;
@@ -538,9 +586,11 @@ select:focus {
     margin-right: 10px;
     border: 1px solid #ff523b;
 }
+
 input:focus {
     outline: none;
 }
+
 .single-product .fa {
     color: #ff523b;
 }
@@ -556,10 +606,12 @@ input:focus {
 .cart-page {
     margin-top: 80px;
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
 }
+
 .cart-info {
     display: flex;
     flex-wrap: wrap;
@@ -579,6 +631,7 @@ table {
     background: #ff523b;
     font-weight: normal;
 }
+
 th:last-child {
     text-align: right;
 }
@@ -587,20 +640,24 @@ th:last-child {
 td {
     padding: 10px 5px;
 }
+
 td input {
     width: 40px;
     height: 30px;
     padding: 5px;
 }
+
 td a {
     color: #ff523b;
     font-size: 12px;
 }
+
 td img {
     width: 80px;
     height: 80px;
     margin-right: 10px;
 }
+
 td:last-child {
     text-align: right;
 }
@@ -609,6 +666,7 @@ td:last-child {
     display: flex;
     justify-content: flex-end;
 }
+
 .total-price table {
     border-top: 3px solid #ff523b;
     width: 100%;
@@ -641,7 +699,7 @@ td:last-child {
     text-align: center;
     padding: 20px 0;
     margin: auto;
-    box-shadow: 0 0 20px 0px rgba(0,0,0,0.1);
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
 }
 
 .form-container span {
@@ -652,9 +710,11 @@ td:last-child {
     width: 100px;
     display: inline-block;
 }
+
 .form-btn {
     display: inline-block;
 }
+
 .form-container form {
     padding: 0 20px;
     position: absolute;
@@ -667,9 +727,11 @@ form .btn {
     cursor: pointer;
     margin: 10px 0;
 }
+
 form .btn:focus {
     outline: none;
 }
+
 form a {
     font-size: 12px;
 }
@@ -680,4 +742,5 @@ form a {
     background: #ff523b;
     height: 3px;
     margin-top: 8px;
+    margin-left: 2.8em;
 }

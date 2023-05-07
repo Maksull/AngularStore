@@ -15,11 +15,14 @@ import { MainComponent } from "./main.component";
 import { MaterialFeatures } from "./material.module";
 import { ProductDetailsComponent } from "./productDetails.component";
 import { StoreComponent } from "./store.component";
+import { LoginComponent } from "./login.component";
+import { AccountComponent } from "./account.component";
+import { AccountGuard } from "../guards/accountGuard.guard";
 
 @NgModule({
     declarations: [CounterDirective, MainComponent, StoreComponent, HeaderComponent, CartSummaryComponent, FooterComponent, ProductDetailsComponent, 
-        CartDetailsComponent, CheckoutComponent],
+        AccountComponent, LoginComponent, CartDetailsComponent, CheckoutComponent],
     imports: [MaterialFeatures, HttpClientModule, BrowserModule, RouterModule, FormsModule, ReactiveFormsModule],
-    providers: [Cart, Order]
+    providers: [Cart, Order, AccountGuard]
 })
 export class StoreModule{}
