@@ -3,12 +3,13 @@ import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from "@angular/ro
 import { AuthService } from "../services/auth.service";
 
 @Injectable()
-export class AuthGuard {
+export class AdminGuard {
     public constructor(private router: Router, private authService: AuthService) { }
 
     public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        if (!this.authService.isAuthenticated) {
-            this.router.navigateByUrl("/admin/auth");
+        if (!this.authService.isAdmin) {
+            this.router.navigateByUrl("/login");
+
             return false;
         }
         return true;
