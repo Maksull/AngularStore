@@ -13,7 +13,7 @@ export class Cart {
         if (line != undefined) {
             line.quantity += quantity;
         } else {
-            this.lines.push(new CartLine(product, quantity));
+            this.lines.push(new CartLine(product, product.productId!, quantity));
         }
         this.recalculate();
     }
