@@ -7,6 +7,12 @@
         </div>
         <div class="my-col-2">
             <p>{{product.category!.name }} | {{product.supplier!.name}}</p>
+            <div class="d-flex justify-content-center justify-content-md-start">
+                <app-star-rating *ngIf="averageRating != 0" [averageRating]="averageRating"></app-star-rating>
+            </div>
+
+            <h4>Average Rating: {{averageRating.toFixed(1)}}</h4>
+
             <h1>{{product.name}}</h1>
             <h4>{{product.price | currency:"USD":"symbol":"2.2-2"}}</h4>
             <input type="number" min="1" [(ngModel)]="quantity" />
@@ -16,6 +22,29 @@
             <p>{{product.description}}</p>
         </div>
     </div>
+    <hr>
+    
+    <h3 class="text-center">Comments <i class="fa fa-comment"></i></h3>
+    <div class="d-flex justify-content-center justify-content-md-start">
+        <div *ngIf="!isLoggedIn()">
+            <p routerLink="/login">Log in to leave comments</p>
+        </div>
+        <div *ngIf="isLoggedIn()">
+            <p>Leave comment</p>
+        </div>
+    </div>
+    <ul class="list-unstyled">
+        <li *ngFor="let rating of ratings" class="media my-4">
+            <div class="media-body">
+                <h5 class="mt-0">{{rating.comment}}</h5>
+                <p>Rating: {{rating.value}}</p>
+                <p class="text-muted font-size-12">by {{rating.userId}}</p>
+            </div>
+        </li>
+        <li *ngIf="ratings.length === 0">No comments yet</li>
+    </ul>
+    <hr>
+
 </div>
 
 <footer></footer>

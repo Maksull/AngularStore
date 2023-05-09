@@ -18,10 +18,12 @@ import { StoreComponent } from "./store.component";
 import { LoginComponent } from "./login.component";
 import { AccountComponent } from "./account.component";
 import { AccountGuard } from "../guards/accountGuard.guard";
+import { StarRatingComponent } from "./star-rating/star-rating.component";
+
 
 @NgModule({
     declarations: [CounterDirective, MainComponent, StoreComponent, HeaderComponent, CartSummaryComponent, FooterComponent, ProductDetailsComponent, 
-        AccountComponent, LoginComponent, CartDetailsComponent, CheckoutComponent],
+        AccountComponent, LoginComponent, CartDetailsComponent, CheckoutComponent, StarRatingComponent],
     imports: [MaterialFeatures, HttpClientModule, BrowserModule, RouterModule, FormsModule, ReactiveFormsModule],
     providers: [Cart, Order, AccountGuard]
 })
