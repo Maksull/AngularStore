@@ -7,6 +7,8 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Account } from "../models/account";
 import { Router } from "@angular/router";
 import { JwtResponse } from "../models/jwtResponse";
+import { emailValidator } from "../validators/email.validator";
+import { compareTwoValidator } from "../validators/compareTwo.validator";
 
 @Component({
     templateUrl: "login.component.html"
@@ -96,7 +98,7 @@ export class LoginComponent {
         Indicator.style.marginLeft = "15.5rem";
     }
 
-    public registed(){
+    public registed() {
         this.isRegisted = false
         this.isLogin = true;
         this.hide = true;
@@ -116,36 +118,16 @@ export class LoginComponent {
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             username: ['', Validators.required],
-            email: ['', Validators.required],
+            email: ['', [Validators.required, emailValidator]],
             password: ['', Validators.required],
             confirmPassword: ['', Validators.required],
-        },
-            { validator: this.confirmedValidator('password', 'confirmPassword') },
-        );
+        }, {
+            validators: Validators.compose([
+                compareTwoValidator('password', 'confirmPassword')
+            ])
+        });
     }
 
-    private confirmedValidator(controlName: string, matchingControlName: string) {
-        return (formGroup: FormGroup) => {
-
-            const control = formGroup.controls[controlName];
-
-            const matchingControl = formGroup.controls[matchingControlName];
-
-            if (matchingControl.errors && !matchingControl.errors["confirmedValidator"]) {
-
-                return;
-            }
-
-            if (control.value !== matchingControl.value) {
-
-                matchingControl.setErrors({ confirmedValidator: true });
-
-            } else {
-
-                matchingControl.setErrors(null);
-            }
-        }
-    }
 
     //#region loginForm gets
     public get name() {

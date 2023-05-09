@@ -2,7 +2,9 @@ import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Cart } from "src/app/models/cart";
 import { Order } from "src/app/models/order";
+import { AuthService } from "src/app/services/auth.service";
 import { OrderService } from "src/app/services/order.service";
+import { emailValidator } from "src/app/validators/email.validator";
 
 @Component({
     templateUrl: "checkout.component.html"
@@ -12,8 +14,9 @@ export class CheckoutComponent {
     public isSubmitted: boolean = false;
     public checkoutForm: FormGroup;
 
-    public constructor(private fb: FormBuilder, private cart: Cart, private orderService: OrderService, public order: Order) {
+    public constructor(private fb: FormBuilder, private cart: Cart, private orderService: OrderService, private authService: AuthService, public order: Order) {
         this.checkoutForm = this.generateForm();
+        this.fillInFormWithData();
     }
 
     public submitOrder() {
@@ -25,17 +28,26 @@ export class CheckoutComponent {
             this.cart.clear();
             this.isOrderSent = true;
         }
+
     }
 
     private generateForm() {
         return this.fb.group({
             name: ['', Validators.required],
-            email: ['', [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
+            email: ['', [Validators.required, emailValidator]],
             address: ['', Validators.required],
             city: ['', Validators.required],
             country: ['', Validators.required],
             zip: ['', Validators.required]
         });
+    }
+    private fillInFormWithData() {
+        if (this.authService.isAuthenticated) {
+            this.checkoutForm.patchValue({
+                name: this.authService.account?.username,
+                email: this.authService.account?.email,
+            });
+        }
     }
 
     //#region checkoutForm gets
