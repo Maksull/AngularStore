@@ -600,6 +600,13 @@ input:focus {
     margin-bottom: 30px;
 }
 
+.leave-comment {
+    width: 100%;
+}
+
+.leave-comment button {
+    margin-top: 5px;
+}
 
 /* ------- cart ------- */
 

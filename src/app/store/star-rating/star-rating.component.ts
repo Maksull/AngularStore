@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'app-star-rating',
@@ -12,6 +12,10 @@ export class StarRatingComponent implements AfterViewInit {
 
     @Input()
     averageRating!: number;
+    @Input()
+    isAuthenticated: boolean = false;
+    @Output()
+    ratingSelected: EventEmitter<number> = new EventEmitter<number>();
 
     ngAfterViewInit() {
         this.ratings = document.querySelectorAll('.rating');
@@ -41,11 +45,6 @@ export class StarRatingComponent implements AfterViewInit {
         this.ratingValue = document.querySelector('.rating-value');
     }
     private setRatingActiveWidth(index = this.ratingValue.innerHTML) {
-        // console.log(index)
-        // console.log(this.averageRating)
-        // console.log(this.ratingValue)
-
-
         const ratingActiveWidth = index / 0.05;
         this.ratingActive.style.width = `${ratingActiveWidth}%`;
     }
@@ -56,22 +55,25 @@ export class StarRatingComponent implements AfterViewInit {
         for (let index = 0; index < ratingItems.length; index++) {
             const ratingItem = ratingItems[index] as HTMLInputElement;
 
-            ratingItem.addEventListener('mouseenter', (e: MouseEvent) => {
-                this.initRatingVars(ratingItem);
-                this.setRatingActiveWidth(ratingItem.value);
-            });
+            if (this.isAuthenticated) {
+                ratingItem.addEventListener('mouseenter', (e: MouseEvent) => {
+                    this.initRatingVars(ratingItem);
+                    this.setRatingActiveWidth(ratingItem.value);
+                });
 
-            ratingItem.addEventListener('mouseleave', (e: MouseEvent) => {
-                this.setRatingActiveWidth();
-            });
+                ratingItem.addEventListener('mouseleave', (e: MouseEvent) => {
+                    this.setRatingActiveWidth();
+                });
 
-            ratingItem.addEventListener('click', (e: MouseEvent) => {
-                this.initRatingVars(rating);
+                ratingItem.addEventListener('click', (e: MouseEvent) => {
+                    this.initRatingVars(rating);
 
-                //set your value
-                this.ratingValue.innerHTML = index + 1;
-                this.setRatingActiveWidth();
-            });
+                    //set your value
+                    this.ratingValue.innerHTML = index + 1;
+                    this.setRatingActiveWidth();
+                    this.ratingSelected.emit(index + 1);
+                });
+            }
         }
     }
 }

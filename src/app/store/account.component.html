@@ -33,11 +33,116 @@
         </div>
     </div>
     <div class="form-group row">
-        <div class="col-sm-9 offset-sm-3">
-            <button type="button" class="btn btn-danger" id="logout-btn" (click)="logout()"><i class="fas fa-sign-out-alt"></i>
+        <div class="d-flex justify-content-end justify-content-md-end">
+            <button type="button" class="btn btn-danger" id="logout-btn" (click)="logout()"><i
+                    class="fas fa-sign-out-alt"></i>
                 Logout</button>
         </div>
     </div>
+    <h2 class="text-center" *ngIf="orders.length === 0">No orders</h2>
+    <h2 class="text-center" *ngIf="orders.length > 0">My orders</h2>
+    <mat-table *ngIf="orders.length > 0" [dataSource]="orders">
+        <ng-container matColumnDef="orderId">
+            <mat-header-cell *matHeaderCellDef>Order ID</mat-header-cell>
+            <mat-cell *matCellDef="let order">{{ order.orderId }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let order">{{ order.name }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+            <mat-cell *matCellDef="let order">{{ order.email }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="address">
+            <mat-header-cell *matHeaderCellDef>Address</mat-header-cell>
+            <mat-cell *matCellDef="let order">{{ order.address }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="city">
+            <mat-header-cell *matHeaderCellDef>City</mat-header-cell>
+            <mat-cell *matCellDef="let order">{{ order.city }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="country">
+            <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
+            <mat-cell *matCellDef="let order">{{ order.country }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="zip">
+            <mat-header-cell *matHeaderCellDef>Zip Code</mat-header-cell>
+            <mat-cell *matCellDef="let order">{{ order.zip }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="isShipped">
+            <mat-header-cell *matHeaderCellDef>Shipped</mat-header-cell>
+            <mat-cell *matCellDef="let order">{{ order.isShipped ? 'Yes' : 'No' }}</mat-cell>
+        </ng-container>
+
+        <mat-header-row
+            *matHeaderRowDef="['orderId', 'name', 'email', 'address', 'city', 'country', 'zip', 'isShipped']"></mat-header-row>
+        <mat-row
+            *matRowDef="let row; columns: ['orderId', 'name', 'email', 'address', 'city', 'country', 'zip', 'isShipped']"></mat-row>
+    </mat-table>
+
+    <h2 class="text-center" *ngIf="ratings.length === 0">No ratings</h2>
+    <h2 class="text-center" *ngIf="ratings.length > 0">My ratings</h2>
+    <mat-table *ngIf="ratings.length > 0" [dataSource]="ratingsTableDataSource">
+        <ng-container matColumnDef="ratingId">
+            <mat-header-cell *matHeaderCellDef>Rating ID</mat-header-cell>
+            <mat-cell *matCellDef="let rating">{{ rating.ratingId }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="productId">
+            <mat-header-cell *matHeaderCellDef>Product ID</mat-header-cell>
+            <mat-cell *matCellDef="let rating">{{ rating.productId }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="userId">
+            <mat-header-cell *matHeaderCellDef>User ID</mat-header-cell>
+            <mat-cell *matCellDef="let rating">{{ rating.userId }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="value">
+            <mat-header-cell *matHeaderCellDef>Value</mat-header-cell>
+            <mat-cell *matCellDef="let rating">{{ rating.value }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="comment">
+            <mat-header-cell *matHeaderCellDef>Comment</mat-header-cell>
+            <mat-cell *matCellDef="let rating">
+                <div *ngIf="!isEditingComment(rating)" (click)="editComment(rating)">
+                    {{ rating.comment }}
+                </div>
+                <div *ngIf="isEditingComment(rating)">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Leave a comment</mat-label>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+                            cdkAutosizeMaxRows="14" [(ngModel)]="rating.comment"
+                            (blur)="saveComment(rating)"></textarea>
+                    </mat-form-field>
+                </div>
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+            <mat-cell *matCellDef="let rating">
+                <button mat-flat-button color="accent" (click)="deleteRating(rating.ratingId)">
+                    Delete
+                </button></mat-cell>
+        </ng-container>
+
+        <mat-header-row
+            *matHeaderRowDef="['ratingId', 'productId', 'userId', 'value', 'comment', 'actions']"></mat-header-row>
+        <mat-row
+            *matRowDef="let row; columns: ['ratingId', 'productId', 'userId', 'value', 'comment', 'actions']"></mat-row>
+    </mat-table>
+
 </div>
 
 <footer></footer>
