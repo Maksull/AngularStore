@@ -39,81 +39,64 @@
                 Logout</button>
         </div>
     </div>
-    <h2 class="text-center" *ngIf="orders.length === 0">No orders</h2>
-    <h2 class="text-center" *ngIf="orders.length > 0">My orders</h2>
-    <mat-table *ngIf="orders.length > 0" [dataSource]="orders">
-        <ng-container matColumnDef="orderId">
-            <mat-header-cell *matHeaderCellDef>Order ID</mat-header-cell>
-            <mat-cell *matCellDef="let order">{{ order.orderId }}</mat-cell>
-        </ng-container>
 
-        <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-            <mat-cell *matCellDef="let order">{{ order.name }}</mat-cell>
-        </ng-container>
+    <div class="margin-top-24">
+        <h2 class="text-center" *ngIf="orders.length === 0">No orders</h2>
+        <h2 class="text-center" *ngIf="orders.length > 0">My orders
+            <hr>
+        </h2>
+    </div>
 
-        <ng-container matColumnDef="email">
-            <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
-            <mat-cell *matCellDef="let order">{{ order.email }}</mat-cell>
-        </ng-container>
+    <mat-accordion *ngIf="orders.length > 0" [multi]="true">
+        <mat-expansion-panel *ngFor="let order of orders">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Order ID: {{ order.orderId }}
+                </mat-panel-title>
+                <mat-panel-description>
+                    Name: {{ order.name }}, Shipped: {{ order.isShipped ? 'Yes' : 'No' }}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div>
+                <p>Address: {{ order.address }}</p>
+                <p>City: {{ order.city }}</p>
+                <p>Country: {{ order.country }}</p>
+                <p>Zip: {{ order.zip }}</p>
+                <p>Email: {{ order.email }}</p>
+                <div class="font-size-17">Products: {{order.lines!.length}}</div>
+                <hr>
+                <div *ngFor="let product of order.lines">
+                    <div class="account-orders-products">
+                        <div class="product-name font-size-17">{{ product.product.name }}</div>
+                        <div class="product-quantity font-size-17">{{ product.quantity }}</div>
+                    </div>
+                </div>
 
-        <ng-container matColumnDef="address">
-            <mat-header-cell *matHeaderCellDef>Address</mat-header-cell>
-            <mat-cell *matCellDef="let order">{{ order.address }}</mat-cell>
-        </ng-container>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
 
-        <ng-container matColumnDef="city">
-            <mat-header-cell *matHeaderCellDef>City</mat-header-cell>
-            <mat-cell *matCellDef="let order">{{ order.city }}</mat-cell>
-        </ng-container>
+    <div class="margin-top-24">
+        <h2 class="text-center" *ngIf="ratings.length === 0">No ratings</h2>
+        <h2 class="text-center" *ngIf="ratings.length > 0">My ratings
+            <hr>
+        </h2>
+    </div>
 
-        <ng-container matColumnDef="country">
-            <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
-            <mat-cell *matCellDef="let order">{{ order.country }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="zip">
-            <mat-header-cell *matHeaderCellDef>Zip Code</mat-header-cell>
-            <mat-cell *matCellDef="let order">{{ order.zip }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="isShipped">
-            <mat-header-cell *matHeaderCellDef>Shipped</mat-header-cell>
-            <mat-cell *matCellDef="let order">{{ order.isShipped ? 'Yes' : 'No' }}</mat-cell>
-        </ng-container>
-
-        <mat-header-row
-            *matHeaderRowDef="['orderId', 'name', 'email', 'address', 'city', 'country', 'zip', 'isShipped']"></mat-header-row>
-        <mat-row
-            *matRowDef="let row; columns: ['orderId', 'name', 'email', 'address', 'city', 'country', 'zip', 'isShipped']"></mat-row>
-    </mat-table>
-
-    <h2 class="text-center" *ngIf="ratings.length === 0">No ratings</h2>
-    <h2 class="text-center" *ngIf="ratings.length > 0">My ratings</h2>
-    <mat-table *ngIf="ratings.length > 0" [dataSource]="ratingsTableDataSource">
-        <ng-container matColumnDef="ratingId">
-            <mat-header-cell *matHeaderCellDef>Rating ID</mat-header-cell>
-            <mat-cell *matCellDef="let rating">{{ rating.ratingId }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="productId">
-            <mat-header-cell *matHeaderCellDef>Product ID</mat-header-cell>
-            <mat-cell *matCellDef="let rating">{{ rating.productId }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="userId">
-            <mat-header-cell *matHeaderCellDef>User ID</mat-header-cell>
-            <mat-cell *matCellDef="let rating">{{ rating.userId }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="value">
-            <mat-header-cell *matHeaderCellDef>Value</mat-header-cell>
-            <mat-cell *matCellDef="let rating">{{ rating.value }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="comment">
-            <mat-header-cell *matHeaderCellDef>Comment</mat-header-cell>
-            <mat-cell *matCellDef="let rating">
+    <mat-accordion *ngIf="ratings.length > 0" [multi]="true">
+        <mat-expansion-panel *ngFor="let rating of ratings">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Product ID: {{ rating.productId }}
+                </mat-panel-title>
+                <mat-panel-description>
+                    Value: {{ rating.value }}
+                </mat-panel-description>
+                <mat-icon color="accent" class="test-button-expansion" matTooltip="Delete"
+                    (click)="deleteRating(rating.ratingId!)">delete</mat-icon>
+            </mat-expansion-panel-header>
+            <div>
+                <p>Rating ID: {{ rating.ratingId }}</p>
                 <div *ngIf="!isEditingComment(rating)" (click)="editComment(rating)">
                     {{ rating.comment }}
                 </div>
@@ -125,23 +108,9 @@
                             (blur)="saveComment(rating)"></textarea>
                     </mat-form-field>
                 </div>
-            </mat-cell>
-        </ng-container>
-
-
-        <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
-            <mat-cell *matCellDef="let rating">
-                <button mat-flat-button color="accent" (click)="deleteRating(rating.ratingId)">
-                    Delete
-                </button></mat-cell>
-        </ng-container>
-
-        <mat-header-row
-            *matHeaderRowDef="['ratingId', 'productId', 'userId', 'value', 'comment', 'actions']"></mat-header-row>
-        <mat-row
-            *matRowDef="let row; columns: ['ratingId', 'productId', 'userId', 'value', 'comment', 'actions']"></mat-row>
-    </mat-table>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
 
 </div>
 

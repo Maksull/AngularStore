@@ -755,3 +755,31 @@ form a {
 .font-size-12 {
     font-size: 12px;
 }
+
+.font-size-17 {
+    font-size: 17px;
+}
+
+.margin-top-24{
+    margin-top: 24px;
+}
+
+/* ------- ACCOUNT ------- */
+
+.test-button-expansion {
+    margin-right: 6rem;
+}
+
+.account-orders-products {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-name {
+    flex-basis: 70%;
+}
+
+.product-quantity {
+    flex-basis: 30%;
+    text-align: left;
+}

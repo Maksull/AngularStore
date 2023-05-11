@@ -20,12 +20,14 @@ import { AccountComponent } from "./account.component";
 import { AccountGuard } from "../guards/accountGuard.guard";
 import { StarRatingComponent } from "./star-rating/star-rating.component";
 import { MatTableModule } from "@angular/material/table";
-
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-    declarations: [CounterDirective, MainComponent, StoreComponent, HeaderComponent, CartSummaryComponent, FooterComponent, ProductDetailsComponent, 
+    declarations: [CounterDirective, MainComponent, StoreComponent, HeaderComponent, CartSummaryComponent, FooterComponent, ProductDetailsComponent,
         AccountComponent, LoginComponent, CartDetailsComponent, CheckoutComponent, StarRatingComponent],
-    imports: [MaterialFeatures, HttpClientModule, BrowserModule, RouterModule, FormsModule, ReactiveFormsModule, MatTableModule],
+    imports: [MaterialFeatures, HttpClientModule, BrowserModule, RouterModule, FormsModule, ReactiveFormsModule, MatTableModule,
+        MatExpansionModule, MatIconModule],
     providers: [Cart, Order, AccountGuard]
 })
-export class StoreModule{}
+export class StoreModule { }
