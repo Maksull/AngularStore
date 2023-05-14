@@ -8,7 +8,7 @@
         <div class="my-col-2">
             <p>{{product.category!.name }} | {{product.supplier!.name}}</p>
             <div class="d-flex justify-content-center justify-content-md-start">
-                <app-star-rating *ngIf="averageRating != 0" (ratingSelected)="onRatingSelected($event)"
+                <app-star-rating (ratingSelected)="onRatingSelected($event)"
                     [averageRating]="averageRating" [isAuthenticated]="isLoggedIn()"></app-star-rating>
             </div>
 
@@ -30,7 +30,9 @@
                 </div>
             </div>
 
-            <h4>Average Rating: {{averageRating.toFixed(1)}}</h4>
+            <h4  *ngIf="averageRating > 0">Average Rating: {{averageRating.toFixed(1)}}</h4>
+            <h4  *ngIf="averageRating <= 0">No ratings</h4>
+
 
             <h1>{{product.name}}</h1>
             <h4>{{product.price | currency:"USD":"symbol":"2.2-2"}}</h4>
