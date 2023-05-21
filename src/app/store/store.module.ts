@@ -22,12 +22,13 @@ import { StarRatingComponent } from "./star-rating/star-rating.component";
 import { MatTableModule } from "@angular/material/table";
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
+import { LoginGuard } from "../guards/login.guard";
 
 @NgModule({
     declarations: [CounterDirective, MainComponent, StoreComponent, HeaderComponent, CartSummaryComponent, FooterComponent, ProductDetailsComponent,
         AccountComponent, LoginComponent, CartDetailsComponent, CheckoutComponent, StarRatingComponent],
     imports: [MaterialFeatures, HttpClientModule, BrowserModule, RouterModule, FormsModule, ReactiveFormsModule, MatTableModule,
         MatExpansionModule, MatIconModule],
-    providers: [Cart, Order, AccountGuard]
+    providers: [Cart, Order, AccountGuard, LoginGuard]
 })
 export class StoreModule { }

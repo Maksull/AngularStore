@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 import { JwtResponse } from "../models/jwtResponse";
 import { emailValidator } from "../validators/email.validator";
 import { compareTwoValidator } from "../validators/compareTwo.validator";
+import { phoneNumberValidator } from "../validators/phoneNumber.validator";
 
 @Component({
     templateUrl: "login.component.html"
@@ -72,10 +73,10 @@ export class LoginComponent {
         } else if (!this.isLogin && this.registerForm.valid) {
             var registerRequest: RegisterRequest;
             registerRequest = this.registerForm.value;
+            console.log(registerRequest)
             this.authService.register(registerRequest)
                 .subscribe({
                     next: () => {
-                        console.log("REGISTED")
                         this.isRegisted = true;
                     },
                     error: (err: HttpErrorResponse) => {
@@ -91,17 +92,20 @@ export class LoginComponent {
         this.isLogin = true;
         let Indicator = document.getElementById("Indicator")!;
         Indicator.style.marginLeft = "2.8rem";
+        this.errors = [];
     }
     public toggleRegister() {
         this.isLogin = false;
         let Indicator = document.getElementById("Indicator")!;
         Indicator.style.marginLeft = "15.5rem";
+        this.errors = [];
     }
 
     public registed() {
         this.isRegisted = false
         this.isLogin = true;
         this.hide = true;
+        this.errors = [];
 
         this.registerForm = this.generateRegisterForm();
     }
@@ -119,6 +123,7 @@ export class LoginComponent {
             lastName: ['', Validators.required],
             username: ['', Validators.required],
             email: ['', [Validators.required, emailValidator]],
+            phoneNumber: ['', [Validators.required, phoneNumberValidator]],
             password: ['', Validators.required],
             confirmPassword: ['', Validators.required],
         }, {
@@ -150,6 +155,9 @@ export class LoginComponent {
     }
     public get email() {
         return this.registerForm.get('email')!;
+    }
+    public get phoneNumber() {
+        return this.registerForm.get('phoneNumber')!;
     }
     public get registerPassword() {
         return this.registerForm.get('password')!;

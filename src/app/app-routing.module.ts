@@ -18,6 +18,7 @@ import { LoginComponent } from './store/login.component';
 import { AccountComponent } from './store/account.component';
 import { AccountGuard } from './guards/accountGuard.guard';
 import { AdminGuard } from './guards/adminGuard.guard';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
     { path: "main", component: MainComponent },
@@ -26,7 +27,7 @@ const routes: Routes = [
     { path: "product/:id", component: ProductDetailsComponent },
     { path: "cart", component: CartDetailsComponent, canActivate: [StoreFirstGuard] },
     { path: "checkout", component: CheckoutComponent, canActivate: [StoreFirstGuard] },
-    { path: "login", component: LoginComponent },
+    { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
     { path: "account", component: AccountComponent, canActivate: [AccountGuard] },
     {
         path: "admin", children: [

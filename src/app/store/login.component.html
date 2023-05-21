@@ -78,6 +78,13 @@
                                 </mat-error>
                             </mat-form-field>
                             <mat-form-field>
+                                <mat-label>Phone number</mat-label>
+                                <input matInput formControlName="phoneNumber" placeholder="Enter your phone number" />
+                                <mat-error *ngIf="(isSubmitted || phoneNumber.touched) && phoneNumber.invalid">
+                                    Please enter the phone number
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
                                 <mat-label>Password</mat-label>
                                 <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"
                                     placeholder="Enter your password" />
