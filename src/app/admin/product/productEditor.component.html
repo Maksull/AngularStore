@@ -37,7 +37,8 @@
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Description</mat-label>
-                <input matInput formControlName="description" placeholder="Enter the description" />
+                <textarea matInput formControlName="description" placeholder="Enter the description" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+                    cdkAutosizeMaxRows="14"></textarea>
                 <mat-error *ngIf="description!.touched && description!.invalid || isSubmitted && description!.invalid">
                     Please enter the description
                 </mat-error>
@@ -55,8 +56,8 @@
             </mat-form-field>
 
             <div *ngIf="!editing" class="form-group mt-2">
-                <input class="form-control pl-1" id="FileInput" type="file" (change)="inputImage($event)" formControlName="img"
-                    accept=".png">
+                <input class="form-control pl-1" id="FileInput" type="file" (change)="inputImage($event)"
+                    formControlName="img" accept=".png">
                 <mat-hint>Choose one image for the product</mat-hint>
                 <mat-error *ngIf="img!.touched && img!.invalid || isSubmitted && img!.invalid">
                     Please choose an image
@@ -64,8 +65,8 @@
             </div>
 
             <div *ngIf="editing" class="form-group mt-2">
-                <input class="form-control pl-1" id="FileInput" type="file" (change)="inputImage($event)" formControlName="img"
-                    accept=".png">
+                <input class="form-control pl-1" id="FileInput" type="file" (change)="inputImage($event)"
+                    formControlName="img" accept=".png">
                 <mat-hint>Edit the image for the product</mat-hint>
                 <br>
                 <mat-hint><a target=”_blank” [href]="productImage(product.images!)">Current image</a></mat-hint>
