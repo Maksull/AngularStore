@@ -1,0 +1,36 @@
+.container {
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.account-container {
+    margin-bottom: 200px;
+}
+
+.account-orders-products {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-name {
+    flex-basis: 70%;
+}
+
+.product-quantity {
+    flex-basis: 30%;
+    text-align: left;
+}
+
+.font-size-17 {
+    font-size: 17px;
+}
+
+.margin-top-24 {
+    margin-top: 24px;
+}
+
+.remove-button {
+    margin-right: 6rem;
+}

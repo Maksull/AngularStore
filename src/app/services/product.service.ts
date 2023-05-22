@@ -29,7 +29,7 @@ export class ProductService {
         return this.http.get<Product>(`${environment.apiUrl}/${this.url}/${id}`);
     }
 
-    public getProductRatings(productId: number){
+    public getProductRatings(productId: number) {
         return this.http.get<Rating[]>(`${environment.apiUrl}/ratings/productId/${productId}`);
     }
 

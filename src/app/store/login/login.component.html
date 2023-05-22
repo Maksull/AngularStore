@@ -1,0 +1,129 @@
+<header></header>
+
+<div class="login-page">
+    <div class="container">
+        <div class="my-row">
+            <div class="my-col-2">
+                <img src="assets/images/checkout.png" width="100%">
+            </div>
+            <div class="my-col-2">
+                <div *ngIf="isRegisted" class="m-2 text-center">
+                    <h2>Thanks!</h2>
+                    <p>Now you can log in to your account.</p>
+                    <button class="btn btn-primary" routerLink="/login" (click)="registed()">Return to Store</button>
+                </div>
+                <mat-card *ngIf="!isRegisted" class="login">
+                    <div class="d-flex justify-content-around">
+                        <mat-card-title (click)="toggleLogin()">Login</mat-card-title>
+                        <mat-card-title (click)="toggleRegister()">Register</mat-card-title>
+                    </div>
+                    <hr id="Indicator" class="mr-5">
+                    <mat-card-content>
+                        <form *ngIf="isLogin" [formGroup]="loginForm" (ngSubmit)="submit()">
+                            <mat-form-field>
+                                <mat-label>Name</mat-label>
+                                <input matInput formControlName="name" placeholder="Enter your name" />
+                                <mat-error *ngIf="(isSubmitted || name.touched) && name.invalid">
+                                    Please enter the name
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Password</mat-label>
+                                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"
+                                    placeholder="Enter your password" />
+                                <span mat-icon-button matSuffix (click)="hide = !hide"
+                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </span>
+                                <mat-error *ngIf="(isSubmitted || loginPassword.touched) && loginPassword.invalid">
+                                    Please enter the password
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-error *ngFor="let error of errors" class="bg-danger mt-2 p-2 text-center text-white">
+                                {{error}}
+                            </mat-error>
+                            <div class="d-flex justify-content-center text-center mt-2">
+                                <button class="btn btn-primary m-1" type="submit">Login</button>
+                                <button class="btn btn-secondary m-1" routerLink="/store">Back</button>
+                            </div>
+                        </form>
+
+                        <form *ngIf="!isLogin" [formGroup]="registerForm" (ngSubmit)="submit()">
+                            <mat-form-field>
+                                <mat-label>First name</mat-label>
+                                <input matInput formControlName="firstName" placeholder="Enter your first name" />
+                                <mat-error *ngIf="(isSubmitted || firstName.touched) && firstName.invalid">
+                                    Please enter the first name
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Last name</mat-label>
+                                <input matInput formControlName="lastName" placeholder="Enter your last name" />
+                                <mat-error *ngIf="(isSubmitted || lastName.touched) && lastName.invalid">
+                                    Please enter the last name
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Username</mat-label>
+                                <input matInput formControlName="username" placeholder="Enter your username" />
+                                <mat-error *ngIf="(isSubmitted || username.touched) && username.invalid">
+                                    Please enter the username
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Email</mat-label>
+                                <input matInput formControlName="email" placeholder="Enter your email" />
+                                <mat-error *ngIf="(isSubmitted || email.touched) && email.invalid">
+                                    Please enter the email
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Phone number</mat-label>
+                                <input matInput formControlName="phoneNumber" placeholder="Enter your phone number" />
+                                <mat-error *ngIf="(isSubmitted || phoneNumber.touched) && phoneNumber.invalid">
+                                    Please enter the phone number
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Password</mat-label>
+                                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"
+                                    placeholder="Enter your password" />
+                                <span mat-icon-button matSuffix (click)="hide = !hide"
+                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </span>
+                                <mat-error
+                                    *ngIf="(isSubmitted || registerPassword.touched) && registerPassword.invalid">
+                                    Please enter the password
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Confirm password</mat-label>
+                                <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword"
+                                    placeholder="Confirm you password" />
+                                <span mat-icon-button matSuffix (click)="hide = !hide"
+                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </span>
+                                <mat-error *ngIf="(isSubmitted || confirmPassword.touched) && confirmPassword.invalid">
+                                    Please confirm you password
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-error *ngFor="let error of errors" class="bg-danger mt-2 p-2 text-center text-white">
+                                {{error}}
+                            </mat-error>
+                            <div class="d-flex justify-content-center text-center mt-2">
+                                <button class="btn btn-primary m-1" type="submit">Register</button>
+                                <button class="btn btn-secondary m-1" routerLink="/store">Back</button>
+                            </div>
+                        </form>
+
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer></footer>

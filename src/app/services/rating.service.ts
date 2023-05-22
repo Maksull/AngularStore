@@ -11,28 +11,28 @@ export class RatingService {
 
     constructor(private http: HttpClient) { }
 
-	public getRatingsByUser(){
-		return this.http.get<Rating[]>(`${environment.apiUrl}/${this.url}/userId`, this.getOptions());
-	}
+    public getRatingsByUser() {
+        return this.http.get<Rating[]>(`${environment.apiUrl}/${this.url}/userId`, this.getOptions());
+    }
 
-	public saveRating(rating: Rating){
-		if (rating.ratingId == null || rating.ratingId == '') {
-            return this.http.post<Rating>(`${environment.apiUrl}/${this.url}`, rating, this.getOptions()).subscribe();
+    public saveRating(rating: Rating) {
+        if (rating.ratingId == null || rating.ratingId == '') {
+            return this.http.post<Rating>(`${environment.apiUrl}/${this.url}`, rating, this.getOptions());
         } else {
-			return this.http.put<Rating>(`${environment.apiUrl}/${this.url}`, rating, this.getOptions()).subscribe();
+            return this.http.put<Rating>(`${environment.apiUrl}/${this.url}`, rating, this.getOptions());
         }
-	}
+    }
 
 
-    public deleteRating(id: string){
+    public deleteRating(id: string) {
         return this.http.delete<Rating>(`${environment.apiUrl}/${this.url}/${id}`, this.getOptions());
     }
 
     private getOptions() {
-		return {
-			headers: new HttpHeaders({
-				"Authorization": `Bearer ${localStorage.getItem("token")}`
-			})
-		}
-	}
+        return {
+            headers: new HttpHeaders({
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            })
+        }
+    }
 }

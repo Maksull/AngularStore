@@ -1,0 +1,82 @@
+<header></header>
+
+<div class="categories">
+    <div class="small-container-2">
+        <div class="my-row">
+            <div class="col-3">
+                <img [routerLink]="['/store/Watersports']" src="assets/images/watersports.png">
+                <h4 class="text-center">WATERSPORTS</h4>
+            </div>
+            <div class="col-3">
+                <img [routerLink]="['/store/Football']" src="assets/images/football.png">
+                <h4 class="text-center">FOOTBALL</h4>
+            </div>
+            <div class="col-3">
+                <img [routerLink]="['/store/Chess']" src="assets/images/chess.png">
+                <h4 class="text-center">CHESS</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="small-container-2">
+    <h1 class="title">Featured products</h1>
+    <div class="my-row">
+        <div *ngFor="let p of featuredProducts" class="col-4">
+            <img [routerLink]="['/product', p.productId]" [src]="productImage(p.images)" style="max-height: 300px;">
+            <h4>{{p.name}}</h4>
+            <p>{{p.price | currency:"USD":"symbol":"2.2-2"}}</p>
+        </div>
+    </div>
+    <h2 class="title">Latest products</h2>
+    <div class="my-row">
+        <div *ngFor="let p of latestProducts" class="col-4">
+            <img [routerLink]="['/product', p.productId]" [src]="productImage(p.images)" style="max-height: 300px;">
+            <h4>{{p.name}}</h4>
+            <p>{{p.price | currency:"USD":"symbol":"2.2-2"}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="offer">
+    <div class="small-container-2">
+        <div class="my-row">
+            <div class="my-col-2">
+                <img [routerLink]="['/product', featuredProduct.productId]" [src]="productImage(featuredProduct.images)"
+                    class="offer-img" width="100%">
+            </div>
+            <div class="my-col-2">
+                <p>Exclusive offer on AngularStore</p>
+                <h1>{{featuredProduct.name}}</h1>
+                <small>{{featuredProduct.description}}</small>
+                <br>
+                <a [routerLink]="['/product', featuredProduct.productId]" class="btn btn-warning">Buy now &#8594;</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="brands">
+    <div class="small-container-2">
+        <div class="my-row">
+            <div class="my-col-5">
+                <img src="assets/images/logo-coca-cola.png">
+            </div>
+            <div class="my-col-5">
+                <img src="assets/images/logo-coca-cola.png">
+            </div>
+            <div class="my-col-5">
+                <img src="assets/images/logo-coca-cola.png">
+            </div>
+            <div class="my-col-5">
+                <img src="assets/images/logo-coca-cola.png">
+            </div>
+            <div class="my-col-5">
+                <img src="assets/images/logo-coca-cola.png">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer></footer>

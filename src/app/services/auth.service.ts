@@ -1,11 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import { LoginRequest } from '../models/loginRequest';
 import { RegisterRequest } from '../models/registerRequest';
 import { Account } from '../models/account';
 import { RefreshTokenRequest } from '../models/refreshTokenRequest';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
 	providedIn: 'root'
@@ -38,7 +38,7 @@ export class AuthService {
 	}
 
 	public refresh(refreshToken: RefreshTokenRequest) {
-	  return this.http.post<any>(`${environment.apiUrl}/${this.url}/refresh`, refreshToken);
+		return this.http.post<any>(`${environment.apiUrl}/${this.url}/refresh`, refreshToken);
 	}
 
 	public logout() {
