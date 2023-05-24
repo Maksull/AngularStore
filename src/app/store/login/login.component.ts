@@ -70,6 +70,9 @@ export class LoginComponent {
                         for (let key in err.error.errors) {
                             this.errors.push(err.error.errors[key]);
                         }
+                        if (this.errors.length === 0) {
+                            this.errors.push("Invalid credentials");
+                        }
                     }
                 });
         } else if (!this.isLogin && this.registerForm.valid) {
