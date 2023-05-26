@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CartSummaryComponent } from './cart-summary.component';
+import { Cart } from 'src/app/models/cart';
 
 describe('CartSummaryComponent', () => {
     let component: CartSummaryComponent;
@@ -8,7 +9,8 @@ describe('CartSummaryComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [CartSummaryComponent]
+            declarations: [CartSummaryComponent],
+            providers: [Cart]
         });
         fixture = TestBed.createComponent(CartSummaryComponent);
         component = fixture.componentInstance;
