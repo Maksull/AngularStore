@@ -1,0 +1,33 @@
+<mat-card class="create-edit">
+    <mat-card-title class="text-center">{{editing ? "Edit" : "Create"}} a Supplier</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="supplierEditorForm" (ngSubmit)="save()">
+            <div class="form-group">
+                <mat-form-field *ngIf="editing">
+                    <mat-label>ID</mat-label>
+                    <input matInput name="id" formControlName="supplierId" />
+                </mat-form-field>
+            </div>
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" placeholder="Enter the name" />
+                <mat-error *ngIf="name!.touched && name!.invalid || isSubmitted && name!.invalid">
+                    Please enter the name
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>City</mat-label>
+                <input matInput formControlName="city" placeholder="Enter the city" />
+                <mat-error *ngIf="city!.touched && city!.invalid || isSubmitted && city!.invalid">
+                    Please enter the city
+                </mat-error>
+            </mat-form-field>
+            <button type="submit" mat-flat-button color="primary">
+                {{editing ? "Save" : "Create"}}
+            </button>
+            <button type="reset" mat-stroked-button routerLink="/admin/main/suppliers">
+                Cancel
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

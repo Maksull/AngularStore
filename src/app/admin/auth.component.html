@@ -1,0 +1,41 @@
+<mat-toolbar color="primary">
+    <span></span>
+    AngularStore Admin
+    <span></span>
+</mat-toolbar>
+
+<mat-card class="login">
+    <mat-card-title class="text-center">Login</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="authForm" (ngSubmit)="authenticate()">
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput type="text" formControlName="username" placeholder="Enter your username"/>
+                <mat-error *ngIf="username!.touched && username!.invalid || isSubmitted && username!.invalid">
+                    Please enter the name
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" type="password" placeholder="Enter your password"
+                    formControlName="password">
+                <span mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </span>
+                <mat-error *ngIf="password!.touched && password!.invalid || isSubmitted && password!.invalid">
+                    Please enter the password
+                </mat-error>
+            </mat-form-field>
+
+
+            <mat-error class="bg-danger mt-2 p-2 text-center text-white" *ngIf="errorMessage != null">
+                {{errorMessage}}
+            </mat-error>
+            <div class="d-flex justify-content-center p-2">
+                <button class="btn btn-primary m-1" type="submit">Log In</button>
+                <button class="btn btn-secondary m-1" routerLink="/store">Go back</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
