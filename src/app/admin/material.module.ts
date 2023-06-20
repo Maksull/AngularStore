@@ -22,4 +22,4 @@ const features: any[] = [MatToolbarModule, MatIconModule, MatSidenavModule, MatB
     imports: [features],
     exports: [features]
 })
-export class MaterialFeatures { }
+export class MaterialModule { }

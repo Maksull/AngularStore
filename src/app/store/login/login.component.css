@@ -1,0 +1,80 @@
+.container {
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.login {
+    margin: auto;
+    top: 10%;
+    width: 70%;
+    padding: 1.5em;
+}
+
+.login-page {
+    padding: 50px 0;
+    background: radial-gradient(#fff, #ffd6d6);
+}
+
+#Indicator {
+    width: 100px;
+    border: none;
+    background: #ff523b;
+    height: 3px;
+    margin-top: 8px;
+    margin-left: 2.8em;
+}
+
+form .btn {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+form .btn:focus {
+    outline: none;
+}
+
+input.hide-password::-webkit-input-placeholder {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+input.hide-password:focus::-webkit-input-placeholder {
+    opacity: 1;
+}
+
+input.hide-password::-moz-placeholder {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+input.hide-password:focus::-moz-placeholder {
+    opacity: 1;
+}
+
+input.hide-password:-ms-input-placeholder {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+input.hide-password:focus:-ms-input-placeholder {
+    opacity: 1;
+}
+
+input.hide-password::placeholder {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+input.hide-password:focus::placeholder {
+    opacity: 1;
+}
+
+input.hide-password {
+    -webkit-text-security: disc;
+    -moz-text-security: disc;
+    -ms-text-security: disc;
+}
