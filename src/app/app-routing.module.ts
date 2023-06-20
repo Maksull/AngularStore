@@ -28,6 +28,8 @@ const routes: Routes = [
     { path: "cart", component: CartDetailsComponent, canActivate: [StoreFirstGuard] },
     { path: "checkout", component: CheckoutComponent, canActivate: [StoreFirstGuard] },
     { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
+    { path: "login/:userId/:token", component: LoginComponent, canActivate: [LoginGuard] },
+    { path: "login/resetPassword/:userId/:token", component: LoginComponent, canActivate: [LoginGuard] },
     { path: "account", component: AccountComponent, canActivate: [AccountGuard] },
     {
         path: "admin", children: [

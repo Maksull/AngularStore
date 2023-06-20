@@ -6,11 +6,12 @@
             <div class="my-col-2">
                 <img src="assets/images/checkout.png" width="100%">
             </div>
-            <div class="my-col-2">
+            <div *ngIf="isLoginRegisted" class="my-col-2">
                 <div *ngIf="isRegisted" class="m-2 text-center">
                     <h2>Thanks!</h2>
-                    <p>Now you can log in to your account.</p>
-                    <button class="btn btn-primary" routerLink="/login" (click)="registed()">Return to Store</button>
+                    <p>Now you need to verify your email. Please check your email. Once confirmed, you will be able to
+                        log in to your account.</p>
+                    <button class="btn btn-primary" routerLink="/login" (click)="registed()">Login</button>
                 </div>
                 <mat-card *ngIf="!isRegisted" class="login">
                     <div class="d-flex justify-content-around">
@@ -29,12 +30,10 @@
                             </mat-form-field>
                             <mat-form-field>
                                 <mat-label>Password</mat-label>
-                                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"
+                                <input matInput [ngClass]="{'hide-password': hide}" formControlName="password"
                                     placeholder="Enter your password" />
-                                <span mat-icon-button matSuffix (click)="hide = !hide"
-                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                </span>
+                                <mat-icon matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                    [attr.aria-pressed]="hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                 <mat-error *ngIf="(isSubmitted || loginPassword.touched) && loginPassword.invalid">
                                     Please enter the password
                                 </mat-error>
@@ -42,13 +41,17 @@
                             <mat-error *ngFor="let error of errors" class="bg-danger mt-2 p-2 text-center text-white">
                                 {{error}}
                             </mat-error>
+                            <div class="text-center mt-2">
+                                <span>Forgot your password? </span>
+                                <a (click)="resetPassword()" class="ml-1">Reset Password</a>
+                            </div>
                             <div class="d-flex justify-content-center text-center mt-2">
                                 <button class="btn btn-primary m-1" type="submit">Login</button>
                                 <button class="btn btn-secondary m-1" routerLink="/store">Back</button>
                             </div>
                         </form>
 
-                        <form *ngIf="!isLogin" [formGroup]="registerForm" (ngSubmit)="submit()">
+                        <form *ngIf="isRegister" [formGroup]="registerForm" (ngSubmit)="submit()">
                             <mat-form-field>
                                 <mat-label>First name</mat-label>
                                 <input matInput formControlName="firstName" placeholder="Enter your first name" />
@@ -79,19 +82,19 @@
                             </mat-form-field>
                             <mat-form-field>
                                 <mat-label>Phone number</mat-label>
-                                <input matInput formControlName="phoneNumber" placeholder="Enter your phone number" />
+                                <span matPrefix>+38 &nbsp;</span>
+                                <input matInput formControlName="phoneNumber" placeholder="0000000000" />
+                                <mat-icon matSuffix>phone</mat-icon>
                                 <mat-error *ngIf="(isSubmitted || phoneNumber.touched) && phoneNumber.invalid">
                                     Please enter the phone number
                                 </mat-error>
                             </mat-form-field>
                             <mat-form-field>
                                 <mat-label>Password</mat-label>
-                                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"
+                                <input matInput [ngClass]="{'hide-password': hide}" formControlName="password"
                                     placeholder="Enter your password" />
-                                <span mat-icon-button matSuffix (click)="hide = !hide"
-                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                </span>
+                                <mat-icon matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                    [attr.aria-pressed]="hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                 <mat-error
                                     *ngIf="(isSubmitted || registerPassword.touched) && registerPassword.invalid">
                                     Please enter the password
@@ -99,12 +102,10 @@
                             </mat-form-field>
                             <mat-form-field>
                                 <mat-label>Confirm password</mat-label>
-                                <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword"
+                                <input matInput [ngClass]="{'hide-password': hide}" formControlName="confirmPassword"
                                     placeholder="Confirm you password" />
-                                <span mat-icon-button matSuffix (click)="hide = !hide"
-                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                </span>
+                                <mat-icon matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                    [attr.aria-pressed]="hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                 <mat-error *ngIf="(isSubmitted || confirmPassword.touched) && confirmPassword.invalid">
                                     Please confirm you password
                                 </mat-error>
@@ -117,9 +118,105 @@
                                 <button class="btn btn-secondary m-1" routerLink="/store">Back</button>
                             </div>
                         </form>
-
                     </mat-card-content>
                 </mat-card>
+            </div>
+
+            <div *ngIf="isEmailConfirmProcess" class="my-col-2">
+                <div *ngIf="isEmailConfirmed" class="m-2 text-center">
+                    <h2>Congratulations!</h2>
+                    <p>Your email is verified. Now you can login to your account.</p>
+                    <button class="btn btn-primary" routerLink="/login">Login</button>
+                </div>
+                <div *ngIf="!isEmailConfirmed" class="m-2 text-center">
+                    <h2>Something went wrong :(</h2>
+                    <p>
+                        It seems that the email verification process has encountered an issue.
+                        Please ensure that the verification link you clicked on is still valid and hasn't expired.
+                        If the problem persists, please contact our support team for further assistance.
+                        We apologize for any inconvenience caused and will do our best to resolve the issue promptly.
+                    </p>
+                    <button class="btn btn-primary" routerLink="/login">Register</button>
+                </div>
+            </div>
+
+            <div *ngIf="isConfirmResetPassword" class="my-col-2">
+                <div *ngIf="isPasswordChanged" class="m-2 text-center">
+                    <h2>Congratulations!</h2>
+                    <p>Your password is reset. Now you can login to your account.</p>
+                    <button class="btn btn-primary" routerLink="/login">Login</button>
+                </div>
+                <div *ngIf="!isPasswordChanged" class="m-2 text-center">
+                    <mat-card class="login">
+                        <mat-card-title>Reset your password</mat-card-title>
+                        <form [formGroup]="confirmResetPasswordForm" (ngSubmit)="submit()">
+                            <mat-form-field>
+                                <mat-label>New password</mat-label>
+                                <input matInput [ngClass]="{'hide-password': hide}" formControlName="newPassword"
+                                    placeholder="Enter your new password" />
+                                <mat-icon matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                    [attr.aria-pressed]="hide">
+                                    {{hide ? 'visibility_off' : 'visibility'}}
+                                </mat-icon>
+                                <mat-error *ngIf="(isSubmitted || newPassword.touched) && newPassword.invalid">
+                                    Please enter your new password
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Confirm the password</mat-label>
+                                <input matInput [ngClass]="{'hide-password': hide}" formControlName="confirmNewPassword"
+                                    placeholder="Enter your new password" />
+                                <mat-icon matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                    [attr.aria-pressed]="hide">
+                                    {{hide ? 'visibility_off' : 'visibility'}}
+                                </mat-icon>
+                                <mat-error
+                                    *ngIf="(isSubmitted || confirmNewPassword.touched) && confirmNewPassword.invalid">
+                                    Please confirm the password
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-error *ngFor="let error of errors" class="bg-danger mt-2 p-2 text-center text-white">
+                                {{error}}
+                            </mat-error>
+                            <button class="btn btn-primary" type="submit">Reset password</button>
+                        </form>
+                    </mat-card>
+                </div>
+            </div>
+
+            <div *ngIf="isResetPassword" class="my-col-2">
+                <div *ngIf="isResetPasswordSent" class="m-2 text-center">
+                    <h2>Email sent!</h2>
+                    <p>
+                        An email has been sent to your registered email address with a link to reset your password.
+                        Please check your inbox and follow the instructions provided in the email.
+
+                        If you don't receive the email within a few minutes, please check your spam or junk folder. If
+                        you still encounter any issues, please contact our support team for assistance.
+                    </p>
+                    <button class="btn btn-primary" (click)="fromResetPasswordToLogin()" routerLink="/login">Login</button>
+                </div>
+                <div *ngIf="!isResetPasswordSent" class="m-2 text-center">
+                    <mat-card class="login">
+                        <mat-card-title>Reset your password</mat-card-title>
+                        <form [formGroup]="resetPasswordForm!" (ngSubmit)="submit()">
+                            <mat-form-field>
+                                <mat-label>Username</mat-label>
+                                <input matInput formControlName="username" placeholder="Enter your username" />
+                                <mat-error
+                                    *ngIf="(isSubmitted || resetPasswordUsername.touched) && resetPasswordUsername.invalid">
+                                    Please enter your username
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-error *ngFor="let error of errors" class="bg-danger mt-2 p-2 text-center text-white">
+                                {{error}}
+                            </mat-error>
+                            <button class="btn btn-primary" routerLink="/login">Reset password</button>
+                        </form>
+                    </mat-card>
+                </div>
             </div>
         </div>
     </div>

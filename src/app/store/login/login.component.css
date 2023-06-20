@@ -36,3 +36,45 @@ form .btn {
 form .btn:focus {
     outline: none;
 }
+
+input.hide-password::-webkit-input-placeholder {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+input.hide-password:focus::-webkit-input-placeholder {
+    opacity: 1;
+}
+
+input.hide-password::-moz-placeholder {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+input.hide-password:focus::-moz-placeholder {
+    opacity: 1;
+}
+
+input.hide-password:-ms-input-placeholder {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+input.hide-password:focus:-ms-input-placeholder {
+    opacity: 1;
+}
+
+input.hide-password::placeholder {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+input.hide-password:focus::placeholder {
+    opacity: 1;
+}
+
+input.hide-password {
+    -webkit-text-security: disc;
+    -moz-text-security: disc;
+    -ms-text-security: disc;
+}

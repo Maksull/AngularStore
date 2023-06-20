@@ -14,8 +14,8 @@ export class OrderService {
         this.http.get<Order[]>(`${environment.apiUrl}/${this.url}`, this.getOptions()).subscribe((result: Order[]) => (this.orders = result));
     }
 
-    public getOrders(): Order[] {
-        return this.orders;
+    public getOrders() {
+        return this.http.get<Order[]>(`${environment.apiUrl}/${this.url}`, this.getOptions());
     }
 
     public getOrder(id: number): Order | undefined {

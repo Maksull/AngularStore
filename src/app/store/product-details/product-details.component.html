@@ -8,8 +8,8 @@
         <div class="my-col-2">
             <p>{{product.category!.name }} | {{product.supplier!.name}}</p>
             <div class="d-flex justify-content-center justify-content-md-start">
-                <app-star-rating (ratingSelected)="onRatingSelected($event)" [averageRating]="averageRating"
-                    [isAuthenticated]="isLoggedIn()"></app-star-rating>
+                <app-star-rating *ngIf="isAverageRatingCalculated" (ratingSelected)="onRatingSelected($event)"
+                    [averageRating]="averageRating" [isAuthenticated]="isLoggedIn()"></app-star-rating>
             </div>
 
             <div class="d-flex justify-content-center justify-content-md-start">
@@ -45,7 +45,7 @@
     </div>
     <hr>
 
-    <h3 class="text-center">Comments <i class="fa fa-comment"></i></h3>
+    <h3 class="text-center">Comments<i class="fa fa-comment"></i></h3>
 
     <ul class="list-unstyled">
         <li *ngFor="let rating of ratings" class="media my-4">

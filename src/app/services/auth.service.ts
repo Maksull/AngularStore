@@ -41,6 +41,19 @@ export class AuthService {
 		return this.http.post<any>(`${environment.apiUrl}/${this.url}/refresh`, refreshToken);
 	}
 
+	public confirmEmail(userId: string, token: string){
+		return this.http.get<any>(`${environment.apiUrl}/${this.url}/confirmEmail?userId=${userId}&token=${encodeURIComponent(token)}`);
+	}
+
+	public confirmResetPassword(userId: string, token: string, newPassword: string){
+		return this.http.get<any>(`${environment.apiUrl}/${this.url}/confirmResetPassword?userId=${userId}&token=${encodeURIComponent(token)}&newPassword=${newPassword}`);
+	}
+
+	public resetPassword(username: string){
+		return this.http.get<any>(`${environment.apiUrl}/${this.url}/resetPassword?username=${username}`);
+	}
+
+
 	public logout() {
 		this.isAuthenticated = false;
 		this.isAdmin = false;

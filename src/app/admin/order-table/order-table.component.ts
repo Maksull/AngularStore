@@ -11,32 +11,47 @@ import { OrderService } from 'src/app/services/order.service';
 export class OrderTableComponent {
     private differ: IterableDiffer<Order>;
     public colsAndRows: string[] = ["name", "email", "address", "city", "country", "zip", "cart_p", "cart_q", "buttons"];
-    public tableDataSource = new MatTableDataSource<Order>(this.orderService.getOrders());
+    public tableDataSource!: MatTableDataSource<Order>;
+    private ordersLoaded: boolean = false;
 
     public constructor(private orderService: OrderService, differs: IterableDiffers) {
-        this.differ = differs.find(orderService.getOrders()).create();
-        this.tableDataSource.filter = "true";
-        this.tableDataSource.filterPredicate = (order, include) => {
-            return !order.isShipped || include.toString() == "true";
-        };
+        this.differ = differs.find([]).create(null!);
+    }
+
+    ngOnInit() {
+        this.orderService.getOrders().subscribe(orders => {
+            this.tableDataSource = new MatTableDataSource<Order>(orders);
+            this.tableDataSource.filter = "true";
+            this.tableDataSource.filterPredicate = (order, include) => {
+                return !order.isShipped || include.toString() == "true";
+            };
+            this.ordersLoaded = true;
+        });
     }
 
     public ngDoCheck() {
-        let changes = this.differ.diff(this.orderService.getOrders());
-        if (changes != null) {
-            this.tableDataSource.data = this.orderService.getOrders();
+        if (this.tableDataSource && this.ordersLoaded) {
+            let changes = this.differ.diff(this.tableDataSource.data);
+            if (changes != null) {
+                this.orderService.getOrders().subscribe(orders => {
+                    this.tableDataSource.data = orders;
+                    this.ordersLoaded = false;
+                });
+            }
         }
     }
 
     public get includeShipped(): boolean {
-        return this.tableDataSource.filter == "true";
+        return this.tableDataSource?.filter == "true";
     }
 
     public set includeShipped(include: boolean) {
+        console.log(include);
         this.tableDataSource.filter = include.toString();
     }
 
     public toggleShipped(order: Order) {
+        console.log(order);
         order.isShipped = !order.isShipped;
         this.orderService.saveOrder(order);
     }

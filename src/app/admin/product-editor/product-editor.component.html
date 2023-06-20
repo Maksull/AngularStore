@@ -47,9 +47,7 @@
                 <mat-label>Price</mat-label>
                 <input matInput type="number" min="0" placeholder="0" formControlName="price"
                     placeholder="Enter the price" />
-                <span matPrefix>
-                    <mat-icon>$&nbsp;</mat-icon>
-                </span>
+                <mat-icon matPrefix>attach_money</mat-icon>
                 <mat-error *ngIf="price!.touched && price!.invalid || isSubmitted && price!.invalid">
                     Please enter the price
                 </mat-error>

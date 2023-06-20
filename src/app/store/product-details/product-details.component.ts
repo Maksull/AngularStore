@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cart } from 'src/app/models/cart';
@@ -18,6 +19,7 @@ export class ProductDetailsComponent {
     public quantity: number = 1;
     public ratings: Rating[] = [];
     public averageRating: number = 0;
+    public isAverageRatingCalculated: boolean = false;
     public selectedRating?: number;
     public comment: string = '';
 
@@ -27,7 +29,16 @@ export class ProductDetailsComponent {
     ngOnInit() {
         let productId = Number(this.activeRoute.snapshot.params["id"]);
         this.productService.getProduct(productId).subscribe((result: Product) => this.product = result);
-        this.productService.getProductRatings(productId).subscribe((ratings: Rating[]) => { this.ratings = ratings; this.calculateAverageRating(); });
+        this.productService.getProductRatings(productId).subscribe({
+            next: (ratings: Rating[]) => {
+                this.ratings = ratings;
+                this.calculateAverageRating();
+                this.isAverageRatingCalculated = true;
+            },
+            error: (err: HttpErrorResponse) => {
+                this.isAverageRatingCalculated = true;
+            }
+        });
     }
 
     public addProductToCart() {
@@ -61,5 +72,6 @@ export class ProductDetailsComponent {
         rating.comment = this.comment;
         this.ratingService.saveRating(rating).subscribe();
         this.comment = '';
+        this.selectedRating = undefined;
     }
 }

@@ -97,6 +97,7 @@
             </mat-expansion-panel-header>
             <div>
                 <p>Rating ID: {{ rating.ratingId }}</p>
+                <small>Click to edit</small>
                 <div *ngIf="!isEditingComment(rating)" (click)="editComment(rating)">
                     {{ rating.comment }}
                 </div>
