@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  angular-store:
+    image: maksull/angular-store:v1
+    container_name: angular-store
+    ports:
+      - '80:80'
